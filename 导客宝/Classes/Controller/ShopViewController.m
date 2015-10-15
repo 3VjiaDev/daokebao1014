@@ -7,45 +7,8 @@
 //
 
 #import "ShopViewController.h"
-#import "LoginViewController.h"
-#import "UIImageView+WebCache.h"
-#import "Tool.h"
-#import "qjtSingleton.h"
-#import "Popover.h"
 
 @interface ShopViewController ()<UITableViewDataSource,UITableViewDelegate>
-{
-    UIView *examineView;
-    UITableView *qjtTableView;
-    BOOL isCloud;
-    
-    NSMutableArray *qjtIDArray;
-    NSMutableArray *qjtNameArray;
-    NSMutableArray *qjtImageArray;
-    
-    BOOL isSelect;
-    UIView *seleceView;
-    
-    UIView *styleView;
-    UIView *areaView;
-    UIView *spaceView;
-    
-    UIPopoverController *popover;
-}
-//改变类型
-- (IBAction)changeStyle:(id)sender;
-//客户信息
-- (IBAction)userInformation:(id)sender;
-//搜索
-- (IBAction)search:(id)sender;
-//筛选
-- (IBAction)select:(id)sender;
-
-//筛选按钮
-@property (weak, nonatomic) IBOutlet UIButton *selectButton;
-@property (weak, nonatomic) IBOutlet UIButton *typebutton;
-//头像
-@property (weak, nonatomic) IBOutlet UIImageView *faceImage;
 
 @end
 
@@ -54,28 +17,50 @@
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-    //isCloud = YES;
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self initFaceImage];
+    [self initQJTTableView];
+    [self initData];
+    [self GetQJTList];
+    
+    //设置通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification:) name:@"tongzhi" object:nil];
+   
+}
+
+#pragma mark 初始化数据
+
+//初始化头像数据
+-(void)initFaceImage
+{
     self.faceImage.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGestureTel = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageViewTouch:)];
-    
     [self.faceImage addGestureRecognizer:tapGestureTel];
+}
 
+//初始化全景图列表
+-(void)initQJTTableView
+{
     qjtTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-100)];
     qjtTableView.delegate = self;
     qjtTableView.dataSource = self;
     qjtTableView.separatorStyle = NO;
     [self.view addSubview:qjtTableView];
-    
+}
+
+//初始化数据
+-(void)initData
+{
     qjtIDArray = [[NSMutableArray alloc]init];
     qjtNameArray = [[NSMutableArray alloc]init];
     qjtImageArray = [[NSMutableArray alloc]init];
-    [self GetQJTList];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tongzhi:) name:@"tongzhi" object:nil];
-   
 }
-- (void)tongzhi:(NSNotification *)text{
+
+#pragma mark 设置通知
+
+//改变获取全景图类型
+- (void)notification:(NSNotification *)text{
     
     if (popover) {
         [popover dismissPopoverAnimated:NO];
@@ -84,20 +69,16 @@
     {
         [self.typebutton setTitle:@"曲美装饰" forState:UIControlStateNormal];
         isCloud = NO;
-         [qjtTableView reloadData];
+        [qjtTableView reloadData];
     }
     else
     {
         [self.typebutton setTitle:@"云库" forState:UIControlStateNormal];
         isCloud = YES;
-        //NSLog(@"%d",qjtImageArray.count);
-         [qjtTableView reloadData];
+        [qjtTableView reloadData];
     }
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 - (IBAction)changeStyle:(id)sender {
     UIButton *button = (UIButton*)sender;
@@ -108,12 +89,11 @@
     
     popover = [[UIPopoverController alloc]initWithContentViewController:qktb];
     popover.backgroundColor = [UIColor colorWithRed:239/255.0 green:142/255.0 blue:61/255.0 alpha:1.0f];
-    
     // 设置尺寸
-    
     popover.popoverContentSize = CGSizeMake(100, 60);
-    
+
     // 从哪里出来
+    
     [popover presentPopoverFromRect:button.frame inView:button.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
@@ -145,28 +125,34 @@
 
 -(void)selectView
 {
-    seleceView = [[UIView alloc]initWithFrame:CGRectMake(0, 82, self.view.frame.size.width, 90)];
+    [self GetSearchList];
+    seleceView = [[UIView alloc]initWithFrame:CGRectMake(0, 85, self.view.frame.size.width, 90)];
     seleceView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:seleceView];
     
     styleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, (seleceView.frame.size.width)/3, seleceView.frame.size.width)];
-    NSMutableArray *a = [[NSMutableArray alloc]initWithObjects:@"全部",@"北欧现代",@"现代",@"欧式",@"中式",@"美式",@"韩式田园",@"地中海", nil];
-    [self drawSelectView:styleView title:@"风格" list:a labTag:0];
+    NSMutableArray *styleArray = [[NSMutableArray alloc]initWithObjects:@"全部",@"北欧现代",@"现代",@"欧式",@"中式",@"美式",@"韩式田园",@"地中海", nil];
+    
+    NSMutableArray *areaArray = [[NSMutableArray alloc]initWithObjects:@"全部",@"10m²以下",@"11-20m²",@"21-30m²",@"31-40m²",@"41-50m²",@"50m²以上", nil];
+    
+    NSMutableArray *spaceArray = [[NSMutableArray alloc]initWithObjects:@"全部",@"主卧房",@"客餐厅",@"卫生间",@"厨房",@"儿童房", nil];
+    [self drawSelectView:styleView title:@"风格" list:styleArray labTag:0];
     [seleceView addSubview:styleView];
     
     areaView = [[UIView alloc]initWithFrame:CGRectMake((seleceView.frame.size.width)/3, 0, (seleceView.frame.size.width)/3, seleceView.frame.size.width)];
     
-    [self drawSelectView:areaView title:@"面积" list:a labTag:1];
+    [self drawSelectView:areaView title:@"面积" list:areaArray labTag:1];
     [seleceView addSubview:areaView];
     
     spaceView = [[UIView alloc]initWithFrame:CGRectMake((2*seleceView.frame.size.width)/3, 0, (seleceView.frame.size.width)/3, seleceView.frame.size.width)];
     
-    [self drawSelectView:spaceView title:@"空间" list:a labTag:2];
+    [self drawSelectView:spaceView title:@"空间" list:spaceArray labTag:2];
     [seleceView addSubview:spaceView];
     
 }
 
 #pragma mark tableViewDelegate
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (!isCloud) {
@@ -179,6 +165,7 @@
     else
         return 250;
 }
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (qjtImageArray.count <= 0) {
@@ -279,6 +266,7 @@
 
     return cell;
 }
+
 #pragma mark 全景图展示
 
 -(UIView *)qjtDraw:(CGRect)rect qjtImage:(NSString*)qjtImage title:(NSString*)qjtTitle isCollect:(BOOL)isCollect tag:(int)tag
@@ -338,6 +326,7 @@
 {
     NSLog(@"11");
 }
+
 #pragma mark 获取全景图列表
 /*
  功能：获取全景图列表
@@ -398,6 +387,65 @@
     
     return request;
 }
+
+
+#pragma mark 获取搜索分类
+/*
+ 功能：获取搜索列表
+ 输入：null
+ 返回：null
+ */
+-(void)GetSearchList
+{
+    [NSURLConnection sendAsynchronousRequest:[self GetSearchListRequest]
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+     {
+         if (connectionError) {
+             [Tool showAlert:@"网络异常" message:@"连接超时"];
+         }
+         else
+         {
+             NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+             //将数据变成标准的json数据
+             NSData *newData = [[Tool newJsonStr:str] dataUsingEncoding:NSUTF8StringEncoding];
+             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:newData options:NSJSONReadingMutableContainers error:nil];
+             NSDictionary *JSON = [dic objectForKey:@"JSON"];
+             NSArray *style = [JSON objectForKey:@"style"];
+             NSArray *roomType = [JSON objectForKey:@"roomType"];
+             NSArray *area = [JSON objectForKey:@"area"];
+             NSLog(@"s = %@,t = %@,a =%@",style,roomType,area);
+         }
+     }];
+}
+
+/*
+ 功能：获取分类网络请求
+ 输入：nil
+ 返回：网络请求
+ */
+
+- (NSMutableURLRequest*)GetSearchListRequest
+{
+    NSURL *requestUrl = [NSURL URLWithString:[Tool requestURL]];
+    
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:requestUrl];
+    request.timeoutInterval=10.0;
+    request.HTTPMethod=@"POST";
+    
+    NSString *authCode =[Tool readAuthCodeString];
+    
+    NSArray *key = @[@"authCode"];
+    NSArray *object = @[authCode];
+    
+    NSString *param=[NSString stringWithFormat:@"Params=%@&Command=DesignScheme/GetSchemeCategory",[Tool param:object forKey:key]];
+    NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);
+    
+    request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
+    
+    return request;
+}
+
 #pragma mark 搜索分类
 
 -(void)drawSelectView:(UIView*)view title:(NSString*)title  list:(NSMutableArray*)listData labTag:(int)tag
@@ -574,4 +622,8 @@
     }
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 @end

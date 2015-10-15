@@ -7,7 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIImageView+WebCache.h"
+#import "Tool.h"
+#import "keySingleton.h"
+#import "qjtSingleton.h"
 
 @interface SearchResultViewController : UIViewController
+//返回
+{
+    NSMutableArray *qjtIDArray;
+    NSMutableArray *qjtNameArray;
+    NSMutableArray *qjtImageArray;
+    
+    UIView *isNullView;
+    
+}
+- (IBAction)return:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UITableView *resultTableView;
 
 @end

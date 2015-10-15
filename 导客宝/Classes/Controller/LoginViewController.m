@@ -7,16 +7,10 @@
 //
 
 #import "LoginViewController.h"
-#import "Tool.h"
-#import "singleton.h"
+
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
-{
-    BOOL isLogin;//防止登录按钮多次点击
-}
-//登录
-- (IBAction)login:(id)sender;
 @end
 
 @implementation LoginViewController
@@ -30,9 +24,9 @@
     
     self.phoneTextfield.text = @"qeknio";
     self.pwdTextField.text = @"123123";
+    self.pwdTextField.secureTextEntry = YES;
     
     [self initLoginBtn];
-    
 }
 
 #pragma mark 登录按钮设置
@@ -218,7 +212,6 @@
     //将视图的Y坐标向上移动offset个单位，以使下面腾出地方用于软键盘的显示
     if(offset > 0)
         self.view.frame = CGRectMake(0.0f, -offset, self.view.frame.size.width, self.view.frame.size.height);
-    
     [UIView commitAnimations];
 
 }

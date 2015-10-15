@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Tool.h"
+#import "singleton.h"
 
 @interface LoginViewController : UIViewController
+{
+    BOOL isLogin;//防止登录按钮多次点击
+}
 
+//登录
+- (IBAction)login:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;

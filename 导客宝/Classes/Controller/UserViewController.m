@@ -8,36 +8,9 @@
 //
 
 #import "UserViewController.h"
-#import "Tool.h"
-#import "singleton.h"
-#import "QRadioButton.h"
+
 
 @interface UserViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UITextViewDelegate,QRadioButtonDelegate>
-{
-    NSMutableArray *nameAry;
-    NSMutableArray *IDAry;
-    NSMutableArray *phoneAry;
-    NSMutableArray *addrAry;
-    NSMutableArray *styleAry;
-    NSMutableArray *markAry;
-    
-    
-    UIView *addView;
-    UIButton *addButton;
-    
-    UITextField *addName;
-    NSString *addSex;
-    UITextField *addPhone;
-    UITextView *addr;
-    UITextView *addMark;
-    NSMutableArray *addStyleAry;
-}
-
-@property (weak, nonatomic) IBOutlet UITableView *customerTable;
-@property (weak, nonatomic) IBOutlet UIView *titleView;
-
-//添加客户
-- (IBAction)addClient:(id)sender;
 
 @end
 
@@ -47,195 +20,25 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
+    [self initData];
+    [self getCustomerList];
+    [self cellFristRow:self.titleView];
+    
+    // Do any additional setup after loading the view.
+}
+#pragma mark 初始化数据
+-(void)initData
+{
     nameAry = [[NSMutableArray alloc]init];
     IDAry = [[NSMutableArray alloc]init];
     phoneAry = [[NSMutableArray alloc]init];
     addrAry = [[NSMutableArray alloc]init];
     styleAry = [[NSMutableArray alloc]init];
     markAry = [[NSMutableArray alloc]init];
-    [self getCustomerList];
-    [self cellFristRow:self.titleView];
-    
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)addClient:(id)sender {
     [self addUserView];
-}
-#pragma mark 获取客户列表
-/*
- 功能：获取客户列表
- 输入：null
- 返回：null
- */
--(void)getCustomerList
-{
-    NSString *deptid = [singleton initSingleton].deptid;
-    
-    [NSURLConnection sendAsynchronousRequest:[self GetCustomerListRequest:deptid pageIndex:@"1"]
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
-     {
-         if (connectionError) {
-             [Tool showAlert:@"网络异常" message:@"连接超时"];
-         }
-         else
-         {
-             NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-             //将数据变成标准的json数据
-             NSData *newData = [[Tool newJsonStr:str] dataUsingEncoding:NSUTF8StringEncoding];
-             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:newData options:NSJSONReadingMutableContainers error:nil];
-             NSArray *ReturnList = [[dic objectForKey:@"JSON"]objectForKey:@"ReturnList"];
-             for (id list in ReturnList) {
-                 NSString *CustomerName = [list objectForKey:@"CustomerName"];
-                 NSString *CustomerId = [list objectForKey:@"CustomerId"];
-                 NSString *Mobile = [list objectForKey:@"Mobile"];
-                 NSString *Address = [list objectForKey:@"Address"];
-                 NSLog(@"name = %@",CustomerName);
-                 
-                 [nameAry addObject:CustomerName];
-                 [IDAry addObject:CustomerId];
-                 [phoneAry addObject:Mobile];
-                 [addrAry addObject:Address];
-                 
-             }
-             NSLog(@"%@",nameAry);
-             [self.customerTable reloadData];
-         }
-     }];
-}
-
-/*
- 功能：用户登录网络请求
- 输入：DeptId：商家ID pageIndex：请求页数
- 返回：网络请求
- */
-
-- (NSMutableURLRequest*)GetCustomerListRequest:(NSString*)DeptId pageIndex:(NSString*)pageIndex
-{
-    NSURL *requestUrl = [NSURL URLWithString:[Tool requestURL]];
-    
-    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:requestUrl];
-    request.timeoutInterval=10.0;
-    request.HTTPMethod=@"POST";
-    
-    NSString *authCode =[Tool readAuthCodeString];
-    
-    NSArray *key = @[@"authCode",@"DeptId",@"pageSize",@"pageIndex"];
-    NSArray *object = @[authCode,DeptId,@"12",pageIndex];
-    
-    NSString *param=[NSString stringWithFormat:@"Params=%@&Command=ShopManager/GetCustomerList",[Tool param:object forKey:key]];
-    NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);
-    
-    request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
-    
-    return request;
-}
-#pragma mark 添加客户信息
-/*
- 功能：添加客户信息
- 输入：null
- 返回：null
- */
-
--(void)addCustomer
-{
-    [NSURLConnection sendAsynchronousRequest:[self addCustomer:addName.text sex:addSex phone:addPhone.text address:addr.text mark:addMark.text style:@[@"11",@"12"]]
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
-     {
-         if (connectionError) {
-             [Tool showAlert:@"网络异常" message:@"连接超时"];
-         }
-         else
-         {
-             NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-             //将数据变成标准的json数据
-             NSData *newData = [[Tool newJsonStr:str] dataUsingEncoding:NSUTF8StringEncoding];
-             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:newData options:NSJSONReadingMutableContainers error:nil];
-             NSString *Json = [dic objectForKey:@"JSON"];
-             if (Json != nil) {
-                 //添加客户成功
-
-                 [UIView animateWithDuration:0.3
-                                  animations:^{
-                                      addView.alpha = 0.0f;
-                                  }
-                                  completion:^(BOOL finished){
-                                      [addView removeFromSuperview];
-                                  }];
-                 nameAry = [[NSMutableArray alloc]init];
-                 IDAry = [[NSMutableArray alloc]init];
-                 phoneAry = [[NSMutableArray alloc]init];
-                 addrAry = [[NSMutableArray alloc]init];
-                 styleAry = [[NSMutableArray alloc]init];
-                 markAry = [[NSMutableArray alloc]init];
-                 [self getCustomerList];
-                 
-
-             }
-             else
-             {
-                 //添加客户失败
-                 [UIView animateWithDuration:0.3
-                                  animations:^{
-                                      addView.alpha = 0.0f;
-                                  }
-                                  completion:^(BOOL finished){
-                                      [addView removeFromSuperview];
-                                  }];
-                 [Tool showAlert:@"添加失败" message:@"添加客户失败"];
-             }
-         }
-     }];
-}
-
-/*
- 功能：添加客户信息网络请求
- 输入：name：客户姓名 sex：性别 phone： address mark style
- 返回：网络请求
- */
-- (NSMutableURLRequest*)addCustomer:(NSString*)name sex:(NSString *)sex phone:(NSString*)phone address:(NSString *)address
-                               mark:(NSString *)mark style:(NSArray*)styAry
-{
-    NSURL *requestUrl = [NSURL URLWithString:[Tool requestURL]];
-    
-    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:requestUrl];
-    request.timeoutInterval=10.0;
-    request.HTTPMethod=@"POST";
-    
-    NSString *authCode =[Tool readAuthCodeString];
-    
-    //生成上传数据
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    [dic setValue:authCode forKey:@"authCode"];
-    
-    NSMutableDictionary *jsonInfoDic = [[NSMutableDictionary alloc]init];
-    
-    [jsonInfoDic setValue:name forKey:@"name"];
-    [jsonInfoDic setValue:sex forKey:@"sex"];
-    [jsonInfoDic setValue:phone forKey:@"mobile"];
-    [jsonInfoDic setValue:address forKey:@"address"];
-    [jsonInfoDic setValue:mark forKey:@"remark"];
-    [jsonInfoDic setValue:styAry forKey:@"categoryIds"];
-    
-    [dic setValue:jsonInfoDic forKey:@"JsonInfo"];
-    
-    NSError *parseError = nil;
-    NSData  *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
-    NSString *string = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    
-    NSString *param=[NSString stringWithFormat:@"Params=%@&Command=ShopManager/EditCustomerInfo",string];
-    NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);
-    
-    request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
-    
-    return request;
 }
 
 #pragma mark tableViewDelegate
@@ -393,6 +196,7 @@
     
     addPhone = [[UITextField alloc]initWithFrame:CGRectMake(50, 2.5, 250, 20)];
     addPhone.borderStyle = UITextBorderStyleNone;
+    addPhone.keyboardType = UIKeyboardTypeNumberPad;
     addPhone.font = [UIFont systemFontOfSize:12.0f];
     [phoneView addSubview:addPhone];
 
@@ -508,4 +312,180 @@
     
     [UIView commitAnimations];
 }
+#pragma mark 获取客户列表
+/*
+ 功能：获取客户列表
+ 输入：null
+ 返回：null
+ */
+-(void)getCustomerList
+{
+    NSString *deptid = [singleton initSingleton].deptid;
+    
+    [NSURLConnection sendAsynchronousRequest:[self GetCustomerListRequest:deptid pageIndex:@"1"]
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+     {
+         if (connectionError) {
+             [Tool showAlert:@"网络异常" message:@"连接超时"];
+         }
+         else
+         {
+             NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+             //将数据变成标准的json数据
+             NSData *newData = [[Tool newJsonStr:str] dataUsingEncoding:NSUTF8StringEncoding];
+             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:newData options:NSJSONReadingMutableContainers error:nil];
+             NSArray *ReturnList = [[dic objectForKey:@"JSON"]objectForKey:@"ReturnList"];
+             for (id list in ReturnList) {
+                 NSString *CustomerName = [list objectForKey:@"CustomerName"];
+                 NSString *CustomerId = [list objectForKey:@"CustomerId"];
+                 NSString *Mobile = [list objectForKey:@"Mobile"];
+                 NSString *Address = [list objectForKey:@"Address"];
+                 NSLog(@"name = %@",CustomerName);
+                 
+                 [nameAry addObject:CustomerName];
+                 [IDAry addObject:CustomerId];
+                 [phoneAry addObject:Mobile];
+                 [addrAry addObject:Address];
+                 
+             }
+             NSLog(@"%@",nameAry);
+             [self.customerTable reloadData];
+         }
+     }];
+}
+
+/*
+ 功能：用户登录网络请求
+ 输入：DeptId：商家ID pageIndex：请求页数
+ 返回：网络请求
+ */
+
+- (NSMutableURLRequest*)GetCustomerListRequest:(NSString*)DeptId pageIndex:(NSString*)pageIndex
+{
+    NSURL *requestUrl = [NSURL URLWithString:[Tool requestURL]];
+    
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:requestUrl];
+    request.timeoutInterval=10.0;
+    request.HTTPMethod=@"POST";
+    
+    NSString *authCode =[Tool readAuthCodeString];
+    
+    NSArray *key = @[@"authCode",@"DeptId",@"pageSize",@"pageIndex"];
+    NSArray *object = @[authCode,DeptId,@"12",pageIndex];
+    
+    NSString *param=[NSString stringWithFormat:@"Params=%@&Command=ShopManager/GetCustomerList",[Tool param:object forKey:key]];
+    NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);
+    
+    request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
+    
+    return request;
+}
+#pragma mark 添加客户信息
+/*
+ 功能：添加客户信息
+ 输入：null
+ 返回：null
+ */
+
+-(void)addCustomer
+{
+    [NSURLConnection sendAsynchronousRequest:[self addCustomer:addName.text sex:addSex phone:addPhone.text address:addr.text mark:addMark.text style:@[@"11",@"12"]]
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+     {
+         if (connectionError) {
+             [Tool showAlert:@"网络异常" message:@"连接超时"];
+         }
+         else
+         {
+             NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+             //将数据变成标准的json数据
+             NSData *newData = [[Tool newJsonStr:str] dataUsingEncoding:NSUTF8StringEncoding];
+             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:newData options:NSJSONReadingMutableContainers error:nil];
+             NSString *Json = [dic objectForKey:@"JSON"];
+             if (Json != nil) {
+                 //添加客户成功
+                 
+                 [UIView animateWithDuration:0.3
+                                  animations:^{
+                                      addView.alpha = 0.0f;
+                                  }
+                                  completion:^(BOOL finished){
+                                      [addView removeFromSuperview];
+                                  }];
+                 nameAry = [[NSMutableArray alloc]init];
+                 IDAry = [[NSMutableArray alloc]init];
+                 phoneAry = [[NSMutableArray alloc]init];
+                 addrAry = [[NSMutableArray alloc]init];
+                 styleAry = [[NSMutableArray alloc]init];
+                 markAry = [[NSMutableArray alloc]init];
+                 [self getCustomerList];
+                 
+                 
+             }
+             else
+             {
+                 //添加客户失败
+                 [UIView animateWithDuration:0.3
+                                  animations:^{
+                                      addView.alpha = 0.0f;
+                                  }
+                                  completion:^(BOOL finished){
+                                      [addView removeFromSuperview];
+                                  }];
+                 [Tool showAlert:@"添加失败" message:@"添加客户失败"];
+             }
+         }
+     }];
+}
+
+/*
+ 功能：添加客户信息网络请求
+ 输入：name：客户姓名 sex：性别 phone： address mark style
+ 返回：网络请求
+ */
+- (NSMutableURLRequest*)addCustomer:(NSString*)name sex:(NSString *)sex phone:(NSString*)phone address:(NSString *)address
+                               mark:(NSString *)mark style:(NSArray*)styAry
+{
+    NSURL *requestUrl = [NSURL URLWithString:[Tool requestURL]];
+    
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:requestUrl];
+    request.timeoutInterval=10.0;
+    request.HTTPMethod=@"POST";
+    
+    NSString *authCode =[Tool readAuthCodeString];
+    
+    //生成上传数据
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:authCode forKey:@"authCode"];
+    
+    NSMutableDictionary *jsonInfoDic = [[NSMutableDictionary alloc]init];
+    
+    [jsonInfoDic setValue:name forKey:@"name"];
+    [jsonInfoDic setValue:sex forKey:@"sex"];
+    [jsonInfoDic setValue:phone forKey:@"mobile"];
+    [jsonInfoDic setValue:address forKey:@"address"];
+    [jsonInfoDic setValue:mark forKey:@"remark"];
+    [jsonInfoDic setValue:styAry forKey:@"categoryIds"];
+    
+    [dic setValue:jsonInfoDic forKey:@"JsonInfo"];
+    
+    NSError *parseError = nil;
+    NSData  *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    NSString *string = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSString *param=[NSString stringWithFormat:@"Params=%@&Command=ShopManager/EditCustomerInfo",string];
+    NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);
+    
+    request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
+    
+    return request;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 @end

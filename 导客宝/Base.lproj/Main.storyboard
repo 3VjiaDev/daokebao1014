@@ -622,9 +622,6 @@
                                                 <include reference="G5X-xC-L2O"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="693" y="15" width="75" height="65"/>
-                                        </variation>
                                         <connections>
                                             <action selector="addClient:" destination="4Ij-xC-UXK" eventType="touchUpInside" id="26j-me-mT1"/>
                                         </connections>
@@ -675,9 +672,6 @@
                                                 <include reference="yMi-ds-FKb"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="325" y="15" width="119" height="65"/>
-                                        </variation>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -722,16 +716,10 @@
                                         <include reference="uQO-ID-KEi"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="80"/>
-                                </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EnU-nL-fHK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="15" y="144" width="738" height="850"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="4Ij-xC-UXK" id="QR5-Xw-FKK"/>
                                     <outlet property="delegate" destination="4Ij-xC-UXK" id="Tqf-Bu-4M3"/>
@@ -750,8 +738,7 @@
                                         <exclude reference="des-G8-ODe"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="15" y="99" width="738" height="44"/>
+                                <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="constraints">
                                         <include reference="des-G8-ODe"/>
                                     </mask>
@@ -873,9 +860,6 @@
                                                 <include reference="H0y-zX-LPV"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="693" y="15" width="75" height="65"/>
-                                        </variation>
                                         <connections>
                                             <action selector="cancel:" destination="1Ch-5E-PVe" eventType="touchUpInside" id="2l1-B4-1Jd"/>
                                             <segue destination="BYZ-38-t0r" kind="modal" id="yQp-iF-yKM"/>
@@ -896,9 +880,6 @@
                                             <mask key="constraints">
                                                 <include reference="6JH-dC-Tmd"/>
                                             </mask>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="30" y="23" width="658" height="44"/>
                                         </variation>
                                         <connections>
                                             <outlet property="delegate" destination="1Ch-5E-PVe" id="LUw-bT-SWF"/>
@@ -944,23 +925,14 @@
                                         <include reference="vni-A3-hnd"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="80"/>
-                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8z-L5-4Zd" userLabel="View热门搜索">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="100" width="384" height="924"/>
-                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bi2-ei-pVm" userLabel="View历史搜索">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="384" y="100" width="384" height="924"/>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1066,9 +1038,6 @@
                                                 <include reference="Ukf-71-uhJ"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="325" y="15" width="119" height="65"/>
-                                        </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QkC-f2-yK4">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1131,16 +1100,10 @@
                                         <include reference="l0c-Go-fCZ"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="80"/>
-                                </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Lgn-4u-0nB">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="100" width="768" height="924"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="x96-OT-lTM" id="TQh-z2-zkO"/>
                                     <outlet property="delegate" destination="x96-OT-lTM" id="aTr-FC-7ec"/>
@@ -1189,6 +1152,10 @@
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="resultTableView" destination="Lgn-4u-0nB" id="Qsy-Gt-h3u"/>
+                        <segue destination="0I8-dq-eQd" kind="modal" identifier="info2" id="qLE-d0-tnO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LMd-Hq-ccY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1227,8 +1194,7 @@
                                         <variation key="widthClass=regular" fixedFrame="YES">
                                             <rect key="frame" x="453" y="0.0" width="119" height="65"/>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="325" y="15" width="119" height="65"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
                                             <mask key="constraints">
                                                 <include reference="BED-fp-weq"/>
                                                 <include reference="RI8-SG-uVB"/>
@@ -1281,9 +1247,6 @@
                                                 <include reference="j7I-Oh-ClT"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="617" y="15" width="75" height="65"/>
-                                        </variation>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQI-N8-uI7">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1305,9 +1268,6 @@
                                                 <include reference="3cf-nJ-zZI"/>
                                                 <include reference="XPc-kA-hf8"/>
                                             </mask>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="693" y="15" width="75" height="65"/>
                                         </variation>
                                     </button>
                                 </subviews>
@@ -1362,8 +1322,7 @@
                                         <include reference="Bcf-ma-Nkp"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="80"/>
+                                <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="constraints">
                                         <include reference="Tl9-sY-bUQ"/>
                                         <include reference="ujx-lb-6jc"/>
@@ -1373,9 +1332,6 @@
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PnR-Dx-IBv">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="80" width="768" height="944"/>
-                                </variation>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
@@ -1452,7 +1408,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nd5-uc-0xp" userLabel="View黄">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="户型展示2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hc-2x-Hkj">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="户型展示" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hc-2x-Hkj">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="119" id="0Ae-32-GYk"/>
@@ -1542,6 +1498,9 @@
                                                 <include reference="fzL-DJ-sed"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <segue destination="x96-OT-lTM" kind="modal" id="AuR-ON-pkD"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1644,10 +1603,13 @@
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="webView" destination="cnl-8g-n1b" id="5G5-Ae-7tB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lgr-gc-Nfx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1037.25" y="544.5"/>
+            <point key="canvasLocation" x="1138.5" y="867"/>
         </scene>
     </scenes>
     <resources>
@@ -1670,6 +1632,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="GIj-gu-CDd"/>
-        <segue reference="pOo-39-8Fh"/>
+        <segue reference="AuR-ON-pkD"/>
+        <segue reference="4hM-BX-GmN"/>
     </inferredMetricsTieBreakers>
 </document>

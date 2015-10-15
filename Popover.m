@@ -8,27 +8,24 @@
 
 #import "Popover.h"
 #import "ShopViewController.h"
+#import "AppDelegate.h"
 
 @interface Popover ()
 {
     ShopViewController *oceanaViewController;
     NSString *selectStr;
 }
-@property(nonatomic,strong)NSArray *menus;
+@property(nonatomic,strong)NSMutableArray *menus;
+
 @end
 
 @implementation Popover
 
--(NSArray *)menus
- {
-    if (_menus==nil) {
-            _menus=@[@"曲美装饰",@"云库"];
-        }
-    return _menus;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.menus = [[NSMutableArray alloc]initWithObjects:@"曲美装饰",@"云库", nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,7 +54,6 @@
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row == 0) {
-            //239/255.0, 142/255.0, 61/255.0
             cell.contentView.backgroundColor = [UIColor colorWithRed:239/255.0 green:142/255.0 blue:61/255.0 alpha:1.0f];
         }
     }
@@ -74,7 +70,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    selectStr =[[NSString alloc] initWithFormat:@"%@",[[self menus] objectAtIndex:indexPath.row]];
+    selectStr =[[NSString alloc] initWithFormat:@"%@",[self.menus objectAtIndex:indexPath.row]];
+    
     NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:selectStr,@"type", nil];
     //创建通知
     NSNotification *notification =[NSNotification notificationWithName:@"tongzhi" object:nil userInfo:dict];

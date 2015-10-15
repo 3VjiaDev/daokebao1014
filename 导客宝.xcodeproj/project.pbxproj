@@ -48,6 +48,7 @@
 		9F5FE5311BCB851200592124 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5FE5201BCB851200592124 /* UIImageView+WebCache.m */; };
 		9F5FE5321BCB851200592124 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5FE5221BCB851200592124 /* UIView+WebCacheOperation.m */; };
 		9F5FE5351BCB91CC00592124 /* qjtSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5FE5341BCB91CC00592124 /* qjtSingleton.m */; };
+		9F6C0ECF1BCF897700164815 /* keySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C0ECE1BCF897700164815 /* keySingleton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,8 @@
 		9F5FE5221BCB851200592124 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		9F5FE5331BCB91CC00592124 /* qjtSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qjtSingleton.h; sourceTree = "<group>"; };
 		9F5FE5341BCB91CC00592124 /* qjtSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = qjtSingleton.m; sourceTree = "<group>"; };
+		9F6C0ECD1BCF897700164815 /* keySingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keySingleton.h; sourceTree = "<group>"; };
+		9F6C0ECE1BCF897700164815 /* keySingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = keySingleton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +217,8 @@
 				9F47BFB21BC7A5BF00D92158 /* singleton.m */,
 				9F5FE5331BCB91CC00592124 /* qjtSingleton.h */,
 				9F5FE5341BCB91CC00592124 /* qjtSingleton.m */,
+				9F6C0ECD1BCF897700164815 /* keySingleton.h */,
+				9F6C0ECE1BCF897700164815 /* keySingleton.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -467,6 +472,7 @@
 				9F5FE52A1BCB851200592124 /* SDWebImageManager.m in Sources */,
 				9F5FE5001BCB44E100592124 /* QjtView.m in Sources */,
 				2E80D2441BC6507B00C29A50 /* SearchViewController.m in Sources */,
+				9F6C0ECF1BCF897700164815 /* keySingleton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

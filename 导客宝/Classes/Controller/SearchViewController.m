@@ -9,18 +9,7 @@
 #import "SearchViewController.h"
 
 @interface SearchViewController ()<UISearchBarDelegate>
-{
-    NSMutableArray *hotArray;
-    NSMutableArray *hisArray;
-    
-}
-@property (weak, nonatomic) IBOutlet UIView *hotView;
-@property (weak, nonatomic) IBOutlet UIView *historyView;
 
-//取消
-- (IBAction)cancel:(id)sender;
-//搜索
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @end
 
 @implementation SearchViewController
@@ -38,19 +27,13 @@
     [self drawListView:self.historyView title:@"搜索历史" delete:YES list:hisArray];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 - (IBAction)cancel:(id)sender {
     
 }
 -(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.searchBar resignFirstResponder];
     NSString *historyString = self.searchBar.text;
-    if (hisArray.count <= 12) {
+    if (hisArray.count <= 8) {
         [hisArray insertObject:historyString atIndex:0];
     }
     else
@@ -59,6 +42,9 @@
     }
     [self writeToPlist:@"history.plist" data:hisArray];
     [self drawListView:self.historyView title:@"搜索历史" delete:YES list:hisArray];
+    keySingleton *key = [keySingleton initKeySingleton];
+    key.keyWord = self.searchBar.text;
+    [self performSegueWithIdentifier:@"searchinfo" sender:self];
 }
 
 -(void)drawListView:(UIView*)view title:(NSString*)title delete:(BOOL)delete list:(NSMutableArray*)listData
@@ -124,6 +110,9 @@
     }
     [self writeToPlist:@"history.plist" data:hisArray];
     [self drawListView:self.historyView title:@"搜索历史" delete:YES list:hisArray];
+    
+    keySingleton *key = [keySingleton initKeySingleton];
+    key.keyWord = lab.text;
 
     [self performSegueWithIdentifier:@"searchinfo" sender:self];
 }
@@ -145,6 +134,7 @@
     }
 }
 
+#pragma mark 文件操作
 /*
  功能：向plist文件中写入数据
  输入：name：文件名
@@ -180,6 +170,10 @@
     NSMutableArray *array = [[NSMutableArray alloc] initWithContentsOfFile:filename];
     return array;
     
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

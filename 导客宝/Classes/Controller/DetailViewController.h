@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "qjtSingleton.h"
+#import "Tool.h"
 
 @interface DetailViewController : UIViewController
+
+@property (strong, nonatomic)NSString* qjtID;
+@property (strong, nonatomic)NSString* qjtName;
+@property (assign, nonatomic)BOOL isCollenct;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
