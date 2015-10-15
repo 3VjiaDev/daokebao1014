@@ -12,6 +12,7 @@
 #import "Tool.h"
 #import "qjtSingleton.h"
 #import "Popover.h"
+#import "singleton.h"
 
 @interface ShopViewController : UIViewController
 {
@@ -27,10 +28,22 @@
     UIView *seleceView;
     
     UIView *styleView;
+    NSMutableArray *styleArray;
+    NSMutableArray *styleIDArray;
+    
     UIView *areaView;
+    NSMutableArray *areaArray;
+    NSMutableArray *areaIDArray;
+    
     UIView *spaceView;
+    NSMutableArray *spaceArray;
+    NSMutableArray *spaceIDArray;
+    
     
     UIPopoverController *popover;
+    
+     UIView *isNullView;
+    
 }
 //改变类型
 - (IBAction)changeStyle:(id)sender;

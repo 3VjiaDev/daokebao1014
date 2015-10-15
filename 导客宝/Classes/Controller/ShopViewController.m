@@ -22,7 +22,8 @@
     [self initFaceImage];
     [self initQJTTableView];
     [self initData];
-    [self GetQJTList];
+    NSString *deptid = [singleton initSingleton].deptid;
+    [self GetQJTList:@"1" deptid:deptid style:@"" area:@"" space:@""];
     
     //设置通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification:) name:@"tongzhi" object:nil];
@@ -69,13 +70,16 @@
     {
         [self.typebutton setTitle:@"曲美装饰" forState:UIControlStateNormal];
         isCloud = NO;
-        [qjtTableView reloadData];
+        [self initData];
+        NSString *deptid = [singleton initSingleton].deptid;
+        [self GetQJTList:@"1" deptid:deptid style:@"" area:@"" space:@""];
     }
     else
     {
         [self.typebutton setTitle:@"云库" forState:UIControlStateNormal];
         isCloud = YES;
-        [qjtTableView reloadData];
+        [self initData];
+        [self GetQJTList:@"1" deptid:@"" style:@"" area:@"" space:@""];
     }
 }
 
@@ -109,7 +113,7 @@
     if (!isSelect) {
         isSelect = !isSelect;
         [self.selectButton setImage:[[UIImage imageNamed:@"shaixuan-dianji"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-        [self selectView];
+        [self selectViewAction];
         float ypoint = qjtTableView.frame.origin.y+95;
         qjtTableView.frame = CGRectMake(0, ypoint, self.view.frame.size.width, self.view.frame.size.height-195);
     }
@@ -123,19 +127,30 @@
     }
 }
 
+-(void)selectViewAction
+{
+    if (styleArray == nil) {
+        styleArray = [[NSMutableArray alloc]init];
+        styleIDArray = [[NSMutableArray alloc]init];
+        areaArray = [[NSMutableArray alloc]init];
+        areaIDArray = [[NSMutableArray alloc]init];
+        spaceArray = [[NSMutableArray alloc]init];
+        spaceIDArray = [[NSMutableArray alloc]init];
+        [self GetSearchList];
+    }
+    else
+    {
+        [self selectView];
+    }
+}
 -(void)selectView
 {
-    [self GetSearchList];
     seleceView = [[UIView alloc]initWithFrame:CGRectMake(0, 85, self.view.frame.size.width, 90)];
     seleceView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:seleceView];
     
     styleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, (seleceView.frame.size.width)/3, seleceView.frame.size.width)];
-    NSMutableArray *styleArray = [[NSMutableArray alloc]initWithObjects:@"全部",@"北欧现代",@"现代",@"欧式",@"中式",@"美式",@"韩式田园",@"地中海", nil];
     
-    NSMutableArray *areaArray = [[NSMutableArray alloc]initWithObjects:@"全部",@"10m²以下",@"11-20m²",@"21-30m²",@"31-40m²",@"41-50m²",@"50m²以上", nil];
-    
-    NSMutableArray *spaceArray = [[NSMutableArray alloc]initWithObjects:@"全部",@"主卧房",@"客餐厅",@"卫生间",@"厨房",@"儿童房", nil];
     [self drawSelectView:styleView title:@"风格" list:styleArray labTag:0];
     [seleceView addSubview:styleView];
     
@@ -148,9 +163,8 @@
     
     [self drawSelectView:spaceView title:@"空间" list:spaceArray labTag:2];
     [seleceView addSubview:spaceView];
-    
-}
 
+}
 #pragma mark tableViewDelegate
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -333,9 +347,9 @@
  输入：null
  返回：null
  */
--(void)GetQJTList
+-(void)GetQJTList:(NSString*)pageIndex deptid:(NSString*)deptid style:(NSString*)style area:(NSString*)area space:(NSString*)space
 {
-    [NSURLConnection sendAsynchronousRequest:[self GetQJTListRequest:@"1"]
+    [NSURLConnection sendAsynchronousRequest:[self GetQJTListRequest:pageIndex deptid:deptid style:style area:area space:space]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
      {
@@ -357,6 +371,28 @@
                  [qjtNameArray addObject:SchemeName];
                  [qjtImageArray addObject:ImagePath];
              }
+             [isNullView removeFromSuperview];
+             if (qjtImageArray.count <= 0) {
+                 float h = self.view.frame.size.height;
+                 float w = self.view.frame.size.width;
+                 isNullView = [[UIView alloc]initWithFrame:CGRectMake((w-108)/2, (h-130)/2, 108, 160)];
+                 UIImageView *nullImage= [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 108, 130)];
+                 nullImage.image = [UIImage imageNamed:@"sousuotubiao"];
+                 
+                 UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 145, 108, 15)];
+                 lab.text = @"搜索结果为空";
+                 lab.textColor = [UIColor colorWithRed:0x9f/255.0 green:0xa0/255.0 blue:0xa0/255.0 alpha:1.0f];
+                 lab.font = [UIFont systemFontOfSize:12.0f];
+                 lab.textAlignment = NSTextAlignmentCenter;
+                 [isNullView addSubview:lab];
+                 
+                 [isNullView addSubview:nullImage];
+                 [self.view addSubview:isNullView];
+             }
+             else
+             {
+                 [isNullView removeFromSuperview];
+             }
              [qjtTableView reloadData];
          }
      }];
@@ -367,7 +403,7 @@
  输入：DeptId：商家ID pageIndex：请求页数
  返回：网络请求
  */
-- (NSMutableURLRequest*)GetQJTListRequest:(NSString*)pageIndex
+- (NSMutableURLRequest*)GetQJTListRequest:(NSString*)pageIndex deptid:(NSString*)deptid style:(NSString*)style area:(NSString*)area space:(NSString*)space
 {
     NSURL *requestUrl = [NSURL URLWithString:[Tool requestURL]];
     
@@ -377,10 +413,10 @@
     
     NSString *authCode =[Tool readAuthCodeString];
     
-    NSArray *key = @[@"authCode",@"pageSize",@"pageIndex"];
-    NSArray *object = @[authCode,@"9",pageIndex];
+    NSArray *key = @[@"authCode",@"deptId",@"style",@"roomtype",@"area",@"pageSize",@"pageIndex"];
+    NSArray *object = @[authCode,deptid,style,space,area,@"9",pageIndex];
     
-    NSString *param=[NSString stringWithFormat:@"Params=%@&Command=ShopManager/GetQJTList",[Tool param:object forKey:key]];
+    NSString *param=[NSString stringWithFormat:@"Params=%@&Command=DesignScheme/GetSchemeList",[Tool param:object forKey:key]];
     NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);
     
     request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
@@ -414,8 +450,20 @@
              NSArray *style = [JSON objectForKey:@"style"];
              NSArray *roomType = [JSON objectForKey:@"roomType"];
              NSArray *area = [JSON objectForKey:@"area"];
-             NSLog(@"s = %@,t = %@,a =%@",style,roomType,area);
+             for (id s in style) {
+                 [styleArray addObject:[s objectForKey:@"StyleName"]];
+                 [styleIDArray addObject:[s objectForKey:@"StyleId"]];
+             }
+             for (id room in roomType) {
+                 [spaceArray addObject:[room objectForKey:@"RoomTypeName"]];
+                 [spaceIDArray addObject:[room objectForKey:@"RoomTypeId"]];
+             }
+             for (id a in area) {
+                 [areaArray addObject:[a objectForKey:@"AreaName"]];
+                 [areaIDArray addObject:[a objectForKey:@"AreaId"]];
+             }
          }
+         [self selectView];
      }];
 }
 
@@ -498,17 +546,47 @@
 }
 -(void)labelTouch:(UIGestureRecognizer*)gestureRecognizer
 {
+    NSString *styleString = @"";
+    NSString *areaString = @"";
+    NSString *spaceString = @"";
+    NSString *deptid;
+    [self initData];
+    if (isCloud) {
+        deptid = @"";
+    }
+    else
+    {
+        deptid = [singleton initSingleton].deptid;
+    }
     UILabel *lab=(UILabel*)gestureRecognizer.view;
     if (lab.tag == 0) {
         [self setLabelColor:styleView string:lab.text];
+        for (int i = 0; i < styleArray.count; i++) {
+            if ([[styleArray objectAtIndex:i]isEqualToString:lab.text]) {
+                styleString = [styleIDArray objectAtIndex:i];
+                [self GetQJTList:@"1" deptid:deptid style:styleString area:areaString space:spaceString];
+            }
+        }
     }
     else if (lab.tag == 1)
     {
         [self setLabelColor:areaView string:lab.text];
+        for (int i = 0; i < areaArray.count; i++) {
+            if ([[areaArray objectAtIndex:i]isEqualToString:lab.text]) {
+                areaString = [areaIDArray objectAtIndex:i];
+                [self GetQJTList:@"1" deptid:deptid style:styleString area:areaString space:spaceString];
+            }
+        }
     }
     else
     {
         [self setLabelColor:spaceView string:lab.text];
+        for (int i = 0; i < spaceArray.count; i++) {
+            if ([[spaceArray objectAtIndex:i]isEqualToString:lab.text]) {
+                spaceString = [spaceIDArray objectAtIndex:i];
+                [self GetQJTList:@"1" deptid:deptid style:styleString area:areaString space:spaceString];
+            }
+        }
     }
 }
 
