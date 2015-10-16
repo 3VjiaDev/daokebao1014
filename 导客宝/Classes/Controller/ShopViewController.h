@@ -39,6 +39,9 @@
     NSMutableArray *spaceArray;
     NSMutableArray *spaceIDArray;
     
+    NSString *styleString;
+    NSString *areaString;
+    NSString *spaceString;
     
     UIPopoverController *popover;
     

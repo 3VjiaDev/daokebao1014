@@ -66,6 +66,14 @@
     if (popover) {
         [popover dismissPopoverAnimated:NO];
     }
+    if (isSelect) {
+        isSelect = !isSelect;
+        [self.selectButton setImage:[[UIImage imageNamed:@"shaixuan-weidianji"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        float ypoint = qjtTableView.frame.origin.y-95;
+        qjtTableView.frame = CGRectMake(0, ypoint, self.view.frame.size.width, self.view.frame.size.height-100);
+        [seleceView removeFromSuperview];
+    }
+    
     if([text.userInfo[@"type"] isEqualToString:@"曲美装饰"])
     {
         [self.typebutton setTitle:@"曲美装饰" forState:UIControlStateNormal];
@@ -111,6 +119,9 @@
 
 - (IBAction)select:(id)sender {
     if (!isSelect) {
+        styleString = @"";
+        areaString = @"";
+        spaceString = @"";
         isSelect = !isSelect;
         [self.selectButton setImage:[[UIImage imageNamed:@"shaixuan-dianji"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         [self selectViewAction];
@@ -130,12 +141,12 @@
 -(void)selectViewAction
 {
     if (styleArray == nil) {
-        styleArray = [[NSMutableArray alloc]init];
-        styleIDArray = [[NSMutableArray alloc]init];
-        areaArray = [[NSMutableArray alloc]init];
-        areaIDArray = [[NSMutableArray alloc]init];
-        spaceArray = [[NSMutableArray alloc]init];
-        spaceIDArray = [[NSMutableArray alloc]init];
+        styleArray = [[NSMutableArray alloc]initWithObjects:@"全部", nil];
+        styleIDArray = [[NSMutableArray alloc]initWithObjects:@"", nil];
+        areaArray = [[NSMutableArray alloc]initWithObjects:@"全部", nil];
+        areaIDArray = [[NSMutableArray alloc]initWithObjects:@"", nil];
+        spaceArray = [[NSMutableArray alloc]initWithObjects:@"全部", nil];
+        spaceIDArray = [[NSMutableArray alloc]initWithObjects:@"", nil];
         [self GetSearchList];
     }
     else
@@ -389,11 +400,7 @@
                  [isNullView addSubview:nullImage];
                  [self.view addSubview:isNullView];
              }
-             else
-             {
-                 [isNullView removeFromSuperview];
-             }
-             [qjtTableView reloadData];
+            [qjtTableView reloadData];
          }
      }];
 }
@@ -546,9 +553,6 @@
 }
 -(void)labelTouch:(UIGestureRecognizer*)gestureRecognizer
 {
-    NSString *styleString = @"";
-    NSString *areaString = @"";
-    NSString *spaceString = @"";
     NSString *deptid;
     [self initData];
     if (isCloud) {
@@ -615,7 +619,7 @@
     examineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     
     [self.view addSubview:examineView];
-    examineView.backgroundColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.3f];
+    examineView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.2f];
     
     float xpoint = (self.view.frame.size.width - 325)/2;
     float ypoint = (self.view.frame.size.height - 350)/2;
