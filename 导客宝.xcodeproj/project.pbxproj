@@ -49,6 +49,9 @@
 		9F5FE5321BCB851200592124 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5FE5221BCB851200592124 /* UIView+WebCacheOperation.m */; };
 		9F5FE5351BCB91CC00592124 /* qjtSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5FE5341BCB91CC00592124 /* qjtSingleton.m */; };
 		9F6C0ECF1BCF897700164815 /* keySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C0ECE1BCF897700164815 /* keySingleton.m */; };
+		9F6F9F1D1BD0A702006FF722 /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6F9F181BD0A702006FF722 /* down@2x.png */; };
+		9F6F9F1E1BD0A702006FF722 /* YiRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6F9F1A1BD0A702006FF722 /* YiRefreshFooter.m */; };
+		9F6F9F1F1BD0A702006FF722 /* YiRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6F9F1C1BD0A702006FF722 /* YiRefreshHeader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +144,11 @@
 		9F5FE5341BCB91CC00592124 /* qjtSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = qjtSingleton.m; sourceTree = "<group>"; };
 		9F6C0ECD1BCF897700164815 /* keySingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keySingleton.h; sourceTree = "<group>"; };
 		9F6C0ECE1BCF897700164815 /* keySingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = keySingleton.m; sourceTree = "<group>"; };
+		9F6F9F181BD0A702006FF722 /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
+		9F6F9F191BD0A702006FF722 /* YiRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiRefreshFooter.h; sourceTree = "<group>"; };
+		9F6F9F1A1BD0A702006FF722 /* YiRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiRefreshFooter.m; sourceTree = "<group>"; };
+		9F6F9F1B1BD0A702006FF722 /* YiRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiRefreshHeader.h; sourceTree = "<group>"; };
+		9F6F9F1C1BD0A702006FF722 /* YiRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiRefreshHeader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +246,7 @@
 		2EFD347F1BC2840200F02152 = {
 			isa = PBXGroup;
 			children = (
+				9F6F9F171BD0A702006FF722 /* YiRefresh */,
 				9F5FE5011BCB851200592124 /* SDWebImage */,
 				2EFD348A1BC2840200F02152 /* 导客宝 */,
 				2EFD34A41BC2840300F02152 /* 导客宝Tests */,
@@ -335,6 +344,19 @@
 			path = "导客宝/SDWebImage";
 			sourceTree = "<group>";
 		};
+		9F6F9F171BD0A702006FF722 /* YiRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				9F6F9F181BD0A702006FF722 /* down@2x.png */,
+				9F6F9F191BD0A702006FF722 /* YiRefreshFooter.h */,
+				9F6F9F1A1BD0A702006FF722 /* YiRefreshFooter.m */,
+				9F6F9F1B1BD0A702006FF722 /* YiRefreshHeader.h */,
+				9F6F9F1C1BD0A702006FF722 /* YiRefreshHeader.m */,
+			);
+			name = YiRefresh;
+			path = "导客宝/YiRefresh";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -387,6 +409,7 @@
 					};
 					2EFD34A01BC2840300F02152 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 4V8N37RPLP;
 						TestTargetID = 2EFD34871BC2840200F02152;
 					};
 				};
@@ -420,6 +443,7 @@
 				9F3508E71BCDF10D003CE959 /* radio_checked.png in Resources */,
 				9F3508EA1BCDF10D003CE959 /* radio_unchecked@2x.png in Resources */,
 				2E46E3001BCBA5D900AC0B9D /* jiazaipic.png in Resources */,
+				9F6F9F1D1BD0A702006FF722 /* down@2x.png in Resources */,
 				9F3508E91BCDF10D003CE959 /* radio_unchecked.png in Resources */,
 				9F3508E81BCDF10D003CE959 /* radio_checked@2x.png in Resources */,
 				2EFD34991BC2840200F02152 /* Images.xcassets in Resources */,
@@ -472,7 +496,9 @@
 				9F5FE52A1BCB851200592124 /* SDWebImageManager.m in Sources */,
 				9F5FE5001BCB44E100592124 /* QjtView.m in Sources */,
 				2E80D2441BC6507B00C29A50 /* SearchViewController.m in Sources */,
+				9F6F9F1E1BD0A702006FF722 /* YiRefreshFooter.m in Sources */,
 				9F6C0ECF1BCF897700164815 /* keySingleton.m in Sources */,
+				9F6F9F1F1BD0A702006FF722 /* YiRefreshHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,7 +549,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhuang jianchao (JGPK8QR2Z4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhuang jianchao (JGPK8QR2Z4)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -545,6 +572,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "da617f0a-2d6f-493c-9954-a0af045b17cf";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -567,7 +595,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhuang jianchao (JGPK8QR2Z4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhuang jianchao (JGPK8QR2Z4)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -582,6 +611,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "da617f0a-2d6f-493c-9954-a0af045b17cf";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -593,9 +623,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhuang jianchao (JGPK8QR2Z4)";
 				INFOPLIST_FILE = "导客宝/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "da617f0a-2d6f-493c-9954-a0af045b17cf";
 			};
 			name = Debug;
 		};
@@ -604,9 +636,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhuang jianchao (JGPK8QR2Z4)";
 				INFOPLIST_FILE = "导客宝/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "da617f0a-2d6f-493c-9954-a0af045b17cf";
 			};
 			name = Release;
 		};
@@ -614,6 +648,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -625,6 +661,7 @@
 				INFOPLIST_FILE = "导客宝Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/导客宝.app/导客宝";
 			};
 			name = Debug;
@@ -633,6 +670,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -640,6 +679,7 @@
 				INFOPLIST_FILE = "导客宝Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/导客宝.app/导客宝";
 			};
 			name = Release;

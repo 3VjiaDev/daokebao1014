@@ -13,11 +13,16 @@
 #import "qjtSingleton.h"
 #import "Popover.h"
 #import "singleton.h"
+#import "YiRefreshHeader.h"
+#import "YiRefreshFooter.h"
 
 @interface ShopViewController : UIViewController
 {
     UIView *examineView;
     UITableView *qjtTableView;
+    YiRefreshHeader *refreshHeader;//下拉刷新
+    YiRefreshFooter *refreshFooter;//上拉加载
+    int indexPage;//页码
     BOOL isCloud;
     
     NSMutableArray *qjtIDArray;

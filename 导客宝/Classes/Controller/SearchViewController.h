@@ -21,4 +21,5 @@
 - (IBAction)cancel:(id)sender;
 //搜索
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
 @end

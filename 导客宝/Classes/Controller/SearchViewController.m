@@ -18,7 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    NSMutableArray *array1 = [[NSMutableArray alloc]initWithObjects:@"111",@"1221",@"111",@"1221",@"111",@"1221", nil];
+    NSMutableArray *array1 = [[NSMutableArray alloc]initWithObjects:@"现代客厅",@"欧式洗手间",@"中国风餐厅",@"简约田园清新大厅",@"现代客厅",@"欧式洗手间",@"中国风餐厅",@"简约田园清新大厅", nil];
     hisArray = [self readplistData1:@"history.plist"];
     if (hisArray == nil) {
         hisArray = [[NSMutableArray alloc]init];
@@ -171,6 +171,7 @@
     return array;
     
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

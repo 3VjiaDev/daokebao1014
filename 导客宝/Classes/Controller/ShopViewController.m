@@ -19,12 +19,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    indexPage = 1;
     [self initFaceImage];
     [self initQJTTableView];
+    [self initYiRefreshHeader];
+    [self initYiRefreshFooter];
     [self initData];
     NSString *deptid = [singleton initSingleton].deptid;
-    [self GetQJTList:@"1" deptid:deptid style:@"" area:@"" space:@""];
-    
+    [self GetQJTList:indexPage deptid:deptid style:@"" area:@"" space:@""];
+    indexPage++;
     //设置通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification:) name:@"tongzhi" object:nil];
    
@@ -57,6 +60,73 @@
     qjtNameArray = [[NSMutableArray alloc]init];
     qjtImageArray = [[NSMutableArray alloc]init];
 }
+#pragma mark 下拉刷新以及上拉加载
+
+//下拉刷新
+-(void)initYiRefreshHeader
+{
+    // YiRefreshHeader  头部刷新按钮的使用
+    refreshHeader=[[YiRefreshHeader alloc] init];
+    refreshHeader.scrollView=qjtTableView;
+    [refreshHeader header];
+    
+    refreshHeader.beginRefreshingBlock=^(){
+        // 后台执行：
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            if (!isCloud) {
+                NSString *deptid = [singleton initSingleton].deptid;
+                [self GetQJTList:indexPage deptid:deptid style:@"" area:@"" space:@""];
+                indexPage++;
+            }
+            else
+            {
+                [self GetQJTList:indexPage deptid:@"" style:@"" area:@"" space:@""];
+                indexPage++;
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 主线程刷新视图
+                //[self analyseRequestData];
+                [qjtTableView reloadData];
+                [refreshHeader endRefreshing];
+            });
+        });
+    };
+    // 是否在进入该界面的时候就开始进入刷新状态
+    //[refreshHeader beginRefreshing];
+}
+
+//上拉刷新
+-(void)initYiRefreshFooter
+{
+    // YiRefreshFooter  底部刷新按钮的使用
+    refreshFooter=[[YiRefreshFooter alloc] init];
+    refreshFooter.scrollView=qjtTableView;
+    [refreshFooter footer];
+    
+    refreshFooter.beginRefreshingBlock=^(){
+        // 后台执行：
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            //sleep(2);
+            // [self analyseRequestData];
+            if (!isCloud) {
+                NSString *deptid = [singleton initSingleton].deptid;
+                [self GetQJTList:indexPage deptid:deptid style:@"" area:@"" space:@""];
+                indexPage++;
+            }
+            else
+            {
+                [self GetQJTList:indexPage deptid:@"" style:@"" area:@"" space:@""];
+                indexPage++;
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 主线程刷新视图
+                [qjtTableView reloadData];
+                [refreshFooter endRefreshing];
+            });
+        });
+    };
+}
 
 #pragma mark 设置通知
 
@@ -79,15 +149,19 @@
         [self.typebutton setTitle:@"曲美装饰" forState:UIControlStateNormal];
         isCloud = NO;
         [self initData];
+        indexPage = 1;
         NSString *deptid = [singleton initSingleton].deptid;
-        [self GetQJTList:@"1" deptid:deptid style:@"" area:@"" space:@""];
+        [self GetQJTList:indexPage deptid:deptid style:@"" area:@"" space:@""];
+        indexPage++;
     }
     else
     {
         [self.typebutton setTitle:@"云库" forState:UIControlStateNormal];
         isCloud = YES;
         [self initData];
-        [self GetQJTList:@"1" deptid:@"" style:@"" area:@"" space:@""];
+        indexPage = 1;
+        [self GetQJTList:indexPage deptid:@"" style:@"" area:@"" space:@""];
+        indexPage++;
     }
 }
 
@@ -356,9 +430,9 @@
 /*
  功能：获取全景图列表
  输入：null
- 返回：null
+ 返回：nullindexPage
  */
--(void)GetQJTList:(NSString*)pageIndex deptid:(NSString*)deptid style:(NSString*)style area:(NSString*)area space:(NSString*)space
+-(void)GetQJTList:(int)pageIndex deptid:(NSString*)deptid style:(NSString*)style area:(NSString*)area space:(NSString*)space
 {
     [NSURLConnection sendAsynchronousRequest:[self GetQJTListRequest:pageIndex deptid:deptid style:style area:area space:space]
                                        queue:[NSOperationQueue mainQueue]
@@ -410,7 +484,7 @@
  输入：DeptId：商家ID pageIndex：请求页数
  返回：网络请求
  */
-- (NSMutableURLRequest*)GetQJTListRequest:(NSString*)pageIndex deptid:(NSString*)deptid style:(NSString*)style area:(NSString*)area space:(NSString*)space
+- (NSMutableURLRequest*)GetQJTListRequest:(int)pageIndex deptid:(NSString*)deptid style:(NSString*)style area:(NSString*)area space:(NSString*)space
 {
     NSURL *requestUrl = [NSURL URLWithString:[Tool requestURL]];
     
@@ -419,9 +493,10 @@
     request.HTTPMethod=@"POST";
     
     NSString *authCode =[Tool readAuthCodeString];
+    NSString *page = [NSString stringWithFormat:@"%d",pageIndex];
     
     NSArray *key = @[@"authCode",@"deptId",@"style",@"roomtype",@"area",@"pageSize",@"pageIndex"];
-    NSArray *object = @[authCode,deptid,style,space,area,@"9",pageIndex];
+    NSArray *object = @[authCode,deptid,style,space,area,@"9",page];
     
     NSString *param=[NSString stringWithFormat:@"Params=%@&Command=DesignScheme/GetSchemeList",[Tool param:object forKey:key]];
     NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);
@@ -555,6 +630,7 @@
 {
     NSString *deptid;
     [self initData];
+    indexPage = 1;
     if (isCloud) {
         deptid = @"";
     }
@@ -568,7 +644,8 @@
         for (int i = 0; i < styleArray.count; i++) {
             if ([[styleArray objectAtIndex:i]isEqualToString:lab.text]) {
                 styleString = [styleIDArray objectAtIndex:i];
-                [self GetQJTList:@"1" deptid:deptid style:styleString area:areaString space:spaceString];
+                [self GetQJTList:indexPage deptid:deptid style:styleString area:areaString space:spaceString];
+                indexPage++;
             }
         }
     }
@@ -578,7 +655,8 @@
         for (int i = 0; i < areaArray.count; i++) {
             if ([[areaArray objectAtIndex:i]isEqualToString:lab.text]) {
                 areaString = [areaIDArray objectAtIndex:i];
-                [self GetQJTList:@"1" deptid:deptid style:styleString area:areaString space:spaceString];
+                [self GetQJTList:indexPage deptid:deptid style:styleString area:areaString space:spaceString];
+                indexPage++;
             }
         }
     }
@@ -588,7 +666,8 @@
         for (int i = 0; i < spaceArray.count; i++) {
             if ([[spaceArray objectAtIndex:i]isEqualToString:lab.text]) {
                 spaceString = [spaceIDArray objectAtIndex:i];
-                [self GetQJTList:@"1" deptid:deptid style:styleString area:areaString space:spaceString];
+                [self GetQJTList:indexPage deptid:deptid style:styleString area:areaString space:spaceString];
+                indexPage++;
             }
         }
     }

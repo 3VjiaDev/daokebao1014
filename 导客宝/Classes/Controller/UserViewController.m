@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
+    self.cloudImageView.hidden = YES;
     [self initData];
     [self getCustomerList];
     [self cellFristRow:self.titleView];
@@ -38,6 +38,7 @@
 }
 
 - (IBAction)addClient:(id)sender {
+    [self.addCustomerBtn setImage:[[UIImage imageNamed:@"tianjiakehu-dianji"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
     [self addUserView];
 }
 
@@ -260,6 +261,7 @@
 
 -(void)close:(id)sender
 {
+    [self.addCustomerBtn setImage:[[UIImage imageNamed:@"tianjiakehu-weidianji"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
     [UIView animateWithDuration:0.3
                      animations:^{
                          addView.alpha = 0.0f;
@@ -406,7 +408,7 @@
              NSString *Json = [dic objectForKey:@"JSON"];
              if (Json != nil) {
                  //添加客户成功
-                 
+                [self.addCustomerBtn setImage:[[UIImage imageNamed:@"tianjiakehu-weidianji"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
                  [UIView animateWithDuration:0.3
                                   animations:^{
                                       addView.alpha = 0.0f;
@@ -421,8 +423,6 @@
                  styleAry = [[NSMutableArray alloc]init];
                  markAry = [[NSMutableArray alloc]init];
                  [self getCustomerList];
-                 
-                 
              }
              else
              {

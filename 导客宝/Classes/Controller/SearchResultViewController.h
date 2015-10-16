@@ -11,6 +11,8 @@
 #import "Tool.h"
 #import "keySingleton.h"
 #import "qjtSingleton.h"
+#import "YiRefreshHeader.h"
+#import "YiRefreshFooter.h"
 
 @interface SearchResultViewController : UIViewController
 //返回
@@ -18,7 +20,10 @@
     NSMutableArray *qjtIDArray;
     NSMutableArray *qjtNameArray;
     NSMutableArray *qjtImageArray;
-    
+    YiRefreshHeader *refreshHeader;//下拉刷新
+    YiRefreshFooter *refreshFooter;//上拉加载
+    int indexPage;//页码
+
     UIView *isNullView;
     
 }

@@ -18,12 +18,63 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
+    indexPage = 1;
     qjtIDArray = [[NSMutableArray alloc]init];
     qjtNameArray = [[NSMutableArray alloc]init];
     qjtImageArray = [[NSMutableArray alloc]init];
     self.resultTableView.separatorStyle = NO;
-    [self GetQJTList];
+    [self initYiRefreshHeader];
+    [self initYiRefreshFooter];
+    [self GetQJTList:indexPage];
+    indexPage++;
+}
+#pragma mark 下拉刷新以及上拉加载
+
+//下拉刷新
+-(void)initYiRefreshHeader
+{
+    // YiRefreshHeader  头部刷新按钮的使用
+    refreshHeader=[[YiRefreshHeader alloc] init];
+    refreshHeader.scrollView=self.resultTableView;
+    [refreshHeader header];
+    
+    refreshHeader.beginRefreshingBlock=^(){
+        // 后台执行：
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            [self GetQJTList:indexPage];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 主线程刷新视图
+                //[self analyseRequestData];
+                [self.resultTableView reloadData];
+                [refreshHeader endRefreshing];
+            });
+        });
+    };
+    // 是否在进入该界面的时候就开始进入刷新状态
+    //[refreshHeader beginRefreshing];
+}
+
+//上拉刷新
+-(void)initYiRefreshFooter
+{
+    // YiRefreshFooter  底部刷新按钮的使用
+    refreshFooter=[[YiRefreshFooter alloc] init];
+    refreshFooter.scrollView=self.resultTableView;
+    [refreshFooter footer];
+    
+    refreshFooter.beginRefreshingBlock=^(){
+        // 后台执行：
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            //sleep(2);
+            // [self analyseRequestData];
+           [self GetQJTList:indexPage];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 主线程刷新视图
+                [self.resultTableView reloadData];
+                [refreshFooter endRefreshing];
+            });
+        });
+    };
 }
 
 #pragma mark tableViewDelegate
@@ -138,9 +189,9 @@
     NSLog(@"11");
 }
 
--(void)GetQJTList
+-(void)GetQJTList:(int)pageIndex
 {
-    [NSURLConnection sendAsynchronousRequest:[self GetQJTListRequest:@"1"]
+    [NSURLConnection sendAsynchronousRequest:[self GetQJTListRequest:pageIndex]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
      {
@@ -194,7 +245,7 @@
  输入：DeptId：商家ID pageIndex：请求页数
  返回：网络请求
  */
-- (NSMutableURLRequest*)GetQJTListRequest:(NSString*)pageIndex
+- (NSMutableURLRequest*)GetQJTListRequest:(int)pageIndex
 {
     NSURL *requestUrl = [NSURL URLWithString:[Tool requestURL]];
     
@@ -204,8 +255,9 @@
     
     NSString *authCode =[Tool readAuthCodeString];
     NSString *keyWord = [keySingleton initKeySingleton].keyWord;
+    NSString *page = [NSString stringWithFormat:@"%d",indexPage];
     NSArray *key = @[@"authCode",@"keyword",@"pageSize",@"pageIndex"];
-    NSArray *object = @[authCode,keyWord,@"9",pageIndex];
+    NSArray *object = @[authCode,keyWord,@"9",page];
     
     NSString *param=[NSString stringWithFormat:@"Params=%@&Command=DesignScheme/GetSchemeList",[Tool param:object forKey:key]];
     NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);

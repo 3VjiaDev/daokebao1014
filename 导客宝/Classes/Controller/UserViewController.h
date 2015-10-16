@@ -30,6 +30,8 @@
     UITextView *addMark;
     NSMutableArray *addStyleAry;
 }
+@property (weak, nonatomic) IBOutlet UIButton *addCustomerBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *cloudImageView;
 
 @property (weak, nonatomic) IBOutlet UITableView *customerTable;
 @property (weak, nonatomic) IBOutlet UIView *titleView;
