@@ -26,8 +26,10 @@
 
     UIView *isNullView;
     
+    UITableView *table;
+    
 }
 - (IBAction)return:(UIButton *)sender;
-@property (weak, nonatomic) IBOutlet UITableView *resultTableView;
+
 
 @end

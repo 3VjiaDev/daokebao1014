@@ -52,6 +52,11 @@
 		9F6F9F1D1BD0A702006FF722 /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6F9F181BD0A702006FF722 /* down@2x.png */; };
 		9F6F9F1E1BD0A702006FF722 /* YiRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6F9F1A1BD0A702006FF722 /* YiRefreshFooter.m */; };
 		9F6F9F1F1BD0A702006FF722 /* YiRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6F9F1C1BD0A702006FF722 /* YiRefreshHeader.m */; };
+		9F6F9F271BD0EB89006FF722 /* checkbox1_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6F9F211BD0EB89006FF722 /* checkbox1_checked.png */; };
+		9F6F9F281BD0EB89006FF722 /* checkbox1_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6F9F221BD0EB89006FF722 /* checkbox1_checked@2x.png */; };
+		9F6F9F291BD0EB89006FF722 /* checkbox1_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6F9F231BD0EB89006FF722 /* checkbox1_unchecked.png */; };
+		9F6F9F2A1BD0EB89006FF722 /* checkbox1_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6F9F241BD0EB89006FF722 /* checkbox1_unchecked@2x.png */; };
+		9F6F9F2B1BD0EB89006FF722 /* QCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6F9F261BD0EB89006FF722 /* QCheckBox.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +154,12 @@
 		9F6F9F1A1BD0A702006FF722 /* YiRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiRefreshFooter.m; sourceTree = "<group>"; };
 		9F6F9F1B1BD0A702006FF722 /* YiRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiRefreshHeader.h; sourceTree = "<group>"; };
 		9F6F9F1C1BD0A702006FF722 /* YiRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiRefreshHeader.m; sourceTree = "<group>"; };
+		9F6F9F211BD0EB89006FF722 /* checkbox1_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox1_checked.png; sourceTree = "<group>"; };
+		9F6F9F221BD0EB89006FF722 /* checkbox1_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox1_checked@2x.png"; sourceTree = "<group>"; };
+		9F6F9F231BD0EB89006FF722 /* checkbox1_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox1_unchecked.png; sourceTree = "<group>"; };
+		9F6F9F241BD0EB89006FF722 /* checkbox1_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox1_unchecked@2x.png"; sourceTree = "<group>"; };
+		9F6F9F251BD0EB89006FF722 /* QCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCheckBox.h; sourceTree = "<group>"; };
+		9F6F9F261BD0EB89006FF722 /* QCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCheckBox.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +257,7 @@
 		2EFD347F1BC2840200F02152 = {
 			isa = PBXGroup;
 			children = (
+				9F6F9F201BD0EB89006FF722 /* QCheckbox */,
 				9F6F9F171BD0A702006FF722 /* YiRefresh */,
 				9F5FE5011BCB851200592124 /* SDWebImage */,
 				2EFD348A1BC2840200F02152 /* 导客宝 */,
@@ -357,6 +369,20 @@
 			path = "导客宝/YiRefresh";
 			sourceTree = "<group>";
 		};
+		9F6F9F201BD0EB89006FF722 /* QCheckbox */ = {
+			isa = PBXGroup;
+			children = (
+				9F6F9F211BD0EB89006FF722 /* checkbox1_checked.png */,
+				9F6F9F221BD0EB89006FF722 /* checkbox1_checked@2x.png */,
+				9F6F9F231BD0EB89006FF722 /* checkbox1_unchecked.png */,
+				9F6F9F241BD0EB89006FF722 /* checkbox1_unchecked@2x.png */,
+				9F6F9F251BD0EB89006FF722 /* QCheckBox.h */,
+				9F6F9F261BD0EB89006FF722 /* QCheckBox.m */,
+			);
+			name = QCheckbox;
+			path = "导客宝/QCheckbox";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -438,14 +464,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F6F9F2A1BD0EB89006FF722 /* checkbox1_unchecked@2x.png in Resources */,
 				2EFD34971BC2840200F02152 /* Main.storyboard in Resources */,
 				2E113AD71BC51C670058950F /* UserInformationTableViewCell.xib in Resources */,
 				9F3508E71BCDF10D003CE959 /* radio_checked.png in Resources */,
+				9F6F9F291BD0EB89006FF722 /* checkbox1_unchecked.png in Resources */,
 				9F3508EA1BCDF10D003CE959 /* radio_unchecked@2x.png in Resources */,
+				9F6F9F281BD0EB89006FF722 /* checkbox1_checked@2x.png in Resources */,
 				2E46E3001BCBA5D900AC0B9D /* jiazaipic.png in Resources */,
 				9F6F9F1D1BD0A702006FF722 /* down@2x.png in Resources */,
 				9F3508E91BCDF10D003CE959 /* radio_unchecked.png in Resources */,
 				9F3508E81BCDF10D003CE959 /* radio_checked@2x.png in Resources */,
+				9F6F9F271BD0EB89006FF722 /* checkbox1_checked.png in Resources */,
 				2EFD34991BC2840200F02152 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,6 +508,7 @@
 				9F5FE5241BCB851200592124 /* NSData+ImageContentType.m in Sources */,
 				2E80D2471BC66B3B00C29A50 /* SearchResultViewController.m in Sources */,
 				9F5FE5271BCB851200592124 /* SDWebImageDecoder.m in Sources */,
+				9F6F9F2B1BD0EB89006FF722 /* QCheckBox.m in Sources */,
 				2E80D24A1BC672D200C29A50 /* ShowDetailViewController.m in Sources */,
 				9F3508F01BCE0297003CE959 /* Popover.m in Sources */,
 				9F5FE5301BCB851200592124 /* UIImageView+HighlightedWebCache.m in Sources */,

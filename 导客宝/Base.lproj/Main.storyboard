@@ -1163,59 +1163,36 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Lgn-4u-0nB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="x96-OT-lTM" id="TQh-z2-zkO"/>
-                                    <outlet property="delegate" destination="x96-OT-lTM" id="aTr-FC-7ec"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Lgn-4u-0nB" firstAttribute="leading" secondItem="yPz-IL-xtH" secondAttribute="leading" id="7ac-PK-JJG"/>
-                            <constraint firstAttribute="trailing" secondItem="Lgn-4u-0nB" secondAttribute="trailing" id="BWk-xK-qig"/>
                             <constraint firstItem="1sB-Zf-f8D" firstAttribute="leading" secondItem="yPz-IL-xtH" secondAttribute="leading" id="DkL-Aj-Nro"/>
                             <constraint firstItem="1sB-Zf-f8D" firstAttribute="top" secondItem="yPz-IL-xtH" secondAttribute="top" id="HVm-YN-TFJ"/>
                             <constraint firstAttribute="trailing" secondItem="1sB-Zf-f8D" secondAttribute="trailing" id="JK0-2D-of0"/>
-                            <constraint firstItem="Gq3-Hp-qgz" firstAttribute="top" secondItem="Lgn-4u-0nB" secondAttribute="bottom" id="N3Q-4u-aVf"/>
-                            <constraint firstItem="Lgn-4u-0nB" firstAttribute="top" secondItem="1sB-Zf-f8D" secondAttribute="bottom" constant="20" id="pzk-T5-43X"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="1sB-Zf-f8D"/>
-                                <exclude reference="Lgn-4u-0nB"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="N3Q-4u-aVf"/>
                                 <exclude reference="DkL-Aj-Nro"/>
                                 <exclude reference="HVm-YN-TFJ"/>
                                 <exclude reference="JK0-2D-of0"/>
-                                <exclude reference="7ac-PK-JJG"/>
-                                <exclude reference="BWk-xK-qig"/>
-                                <exclude reference="pzk-T5-43X"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=regular">
                             <mask key="subviews">
                                 <include reference="1sB-Zf-f8D"/>
-                                <include reference="Lgn-4u-0nB"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="N3Q-4u-aVf"/>
                                 <include reference="DkL-Aj-Nro"/>
                                 <include reference="HVm-YN-TFJ"/>
                                 <include reference="JK0-2D-of0"/>
-                                <include reference="7ac-PK-JJG"/>
-                                <include reference="BWk-xK-qig"/>
-                                <include reference="pzk-T5-43X"/>
                             </mask>
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
-                        <outlet property="resultTableView" destination="Lgn-4u-0nB" id="Qsy-Gt-h3u"/>
                         <segue destination="0I8-dq-eQd" kind="modal" identifier="info2" id="qLE-d0-tnO"/>
                     </connections>
                 </viewController>

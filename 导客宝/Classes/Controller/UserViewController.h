@@ -10,7 +10,9 @@
 #import "Tool.h"
 #import "singleton.h"
 #import "QRadioButton.h"
-@interface UserViewController : UIViewController
+#import "QCheckBox.h"
+
+@interface UserViewController : UIViewController<QCheckBoxDelegate>
 {
     NSMutableArray *nameAry;
     NSMutableArray *IDAry;

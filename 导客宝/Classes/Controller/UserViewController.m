@@ -238,8 +238,21 @@
     [infoView addSubview:styleLab];
     
     UIView *base3View = [[UIView alloc]initWithFrame:CGRectMake(10, 330, infoView.frame.size.width-20, 60)];
-    base3View.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    base3View.backgroundColor = [UIColor whiteColor];
     [infoView addSubview:base3View];
+    NSArray *checkAry = @[@"欧式",@"田园",@"中式",@"地中海",@"简约",@"现代"];
+    for (int i = 0; i < checkAry.count; i++) {
+        QCheckBox *_check1 = [[QCheckBox alloc] initWithDelegate:self];
+        int row = i/3;
+        int col = i%3;
+        _check1.frame = CGRectMake(10+100*col, 30*row, 100, 30);
+        [_check1 setTitle:[checkAry objectAtIndex:i] forState:UIControlStateNormal];
+        [_check1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_check1.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
+        [base3View addSubview:_check1];
+        
+    }
+
     
     addButton = [UIButton buttonWithType:UIButtonTypeCustom];
     addButton.frame = CGRectMake(15, 400, 295, 30);
@@ -271,6 +284,7 @@
                      }];
 
 }
+#pragma mark 单选复选
 -(void)didSelectedRadioButton:(QRadioButton *)radio groupId:(NSString *)groupId
 {
     if([radio.titleLabel.text isEqualToString:@"男"])
@@ -280,6 +294,30 @@
     else
     {
         addSex = @"女";
+    }
+}
+- (void)didSelectedCheckBox:(QCheckBox *)checkbox checked:(BOOL)checked
+{
+    if(checked)
+    {
+        [styleAry addObject:checkbox.titleLabel.text];
+        NSLog(@"%@",styleAry);
+    }
+    else
+    {
+        [styleAry enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            if ([obj isEqualToString:checkbox.titleLabel.text]) {
+                
+                *stop = YES;
+                
+                if (*stop == YES) {
+                    
+                    [styleAry removeObject:obj];
+                }
+            }
+        }];
+        NSLog(@"%@",styleAry);
     }
 }
 -(void)addButtonAction:(id)sender

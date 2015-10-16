@@ -33,13 +33,9 @@
 -(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.searchBar resignFirstResponder];
     NSString *historyString = self.searchBar.text;
-    if (hisArray.count <= 8) {
-        [hisArray insertObject:historyString atIndex:0];
-    }
-    else
-    {
-        [hisArray replaceObjectAtIndex:0 withObject:historyString];
-    }
+
+    [hisArray insertObject:historyString atIndex:0];
+
     [self writeToPlist:@"history.plist" data:hisArray];
     [self drawListView:self.historyView title:@"搜索历史" delete:YES list:hisArray];
     keySingleton *key = [keySingleton initKeySingleton];
@@ -76,7 +72,7 @@
     [view addSubview:lineView2];
     
     for (int i = 0; i < listData.count; i++) {
-        if (i >= 12) {
+        if (i >= 8) {
             return;
         }
         int col = i/4;
@@ -101,13 +97,8 @@
 
     NSString *historyString = lab.text;
     
-    if (hisArray.count <= 12) {
-        [hisArray insertObject:historyString atIndex:0];
-    }
-    else
-    {
-        [hisArray replaceObjectAtIndex:0 withObject:historyString];
-    }
+    [hisArray insertObject:historyString atIndex:0];
+
     [self writeToPlist:@"history.plist" data:hisArray];
     [self drawListView:self.historyView title:@"搜索历史" delete:YES list:hisArray];
     

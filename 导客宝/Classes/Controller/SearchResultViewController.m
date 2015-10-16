@@ -22,7 +22,11 @@
     qjtIDArray = [[NSMutableArray alloc]init];
     qjtNameArray = [[NSMutableArray alloc]init];
     qjtImageArray = [[NSMutableArray alloc]init];
-    self.resultTableView.separatorStyle = NO;
+    table = [[UITableView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-100)];
+    table.delegate = self;
+    table.dataSource = self;
+    [self.view addSubview:table];
+    table.separatorStyle = NO;
     [self initYiRefreshHeader];
     [self initYiRefreshFooter];
     [self GetQJTList:indexPage];
@@ -35,7 +39,7 @@
 {
     // YiRefreshHeader  头部刷新按钮的使用
     refreshHeader=[[YiRefreshHeader alloc] init];
-    refreshHeader.scrollView=self.resultTableView;
+    refreshHeader.scrollView=table;
     [refreshHeader header];
     
     refreshHeader.beginRefreshingBlock=^(){
@@ -45,7 +49,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 主线程刷新视图
                 //[self analyseRequestData];
-                [self.resultTableView reloadData];
+                [table reloadData];
                 [refreshHeader endRefreshing];
             });
         });
@@ -59,7 +63,7 @@
 {
     // YiRefreshFooter  底部刷新按钮的使用
     refreshFooter=[[YiRefreshFooter alloc] init];
-    refreshFooter.scrollView=self.resultTableView;
+    refreshFooter.scrollView=table;
     [refreshFooter footer];
     
     refreshFooter.beginRefreshingBlock=^(){
@@ -70,7 +74,7 @@
            [self GetQJTList:indexPage];
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 主线程刷新视图
-                [self.resultTableView reloadData];
+                [table reloadData];
                 [refreshFooter endRefreshing];
             });
         });
@@ -235,7 +239,7 @@
              {
                  [isNullView removeFromSuperview];
              }
-             [self.resultTableView reloadData];
+             [table reloadData];
          }
      }];
 }
