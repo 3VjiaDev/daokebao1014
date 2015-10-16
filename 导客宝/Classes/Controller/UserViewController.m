@@ -133,8 +133,8 @@
     titleView.backgroundColor = [UIColor colorWithRed:239/255.0 green:142/255.0 blue:61/255.0 alpha:1.0f];
     [infoView addSubview:titleView];
     
-    UIImageView *titleIV = [[UIImageView alloc]initWithFrame:CGRectMake(15, 10, 15, 15)];
-    titleIV.image = [UIImage imageNamed:nil];
+    UIImageView *titleIV = [[UIImageView alloc]initWithFrame:CGRectMake(15, 7, 15, 15)];
+    titleIV.image = [UIImage imageNamed:@"baitianjia"];
     [titleView addSubview:titleIV];
     
     UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(40, 5, 100, 20)];
@@ -144,9 +144,9 @@
     [titleView addSubview:titleLab];
     
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    closeBtn.frame = CGRectMake(titleView.frame.size.width - 30, 5, 20, 20);
+    closeBtn.frame = CGRectMake(titleView.frame.size.width - 30, 7, 15, 15);
     
-    [closeBtn setImage:[[UIImage imageNamed:@"cha-1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+    [closeBtn setImage:[[UIImage imageNamed:@"baicha"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
     [titleView addSubview:closeBtn];
     
