@@ -301,23 +301,19 @@
     if(checked)
     {
         [styleAry addObject:checkbox.titleLabel.text];
-        NSLog(@"%@",styleAry);
     }
     else
     {
         [styleAry enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
             if ([obj isEqualToString:checkbox.titleLabel.text]) {
-                
                 *stop = YES;
-                
                 if (*stop == YES) {
                     
                     [styleAry removeObject:obj];
                 }
             }
         }];
-        NSLog(@"%@",styleAry);
     }
 }
 -(void)addButtonAction:(id)sender
