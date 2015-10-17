@@ -18,9 +18,11 @@
     NSMutableArray *IDAry;
     NSMutableArray *phoneAry;
     NSMutableArray *addrAry;
-    NSMutableArray *styleAry;
+    
     NSMutableArray *markAry;
     
+    NSMutableArray *styleAry;
+    NSMutableArray *unUpdataUserArray;
     
     UIView *addView;
     UIButton *addButton;

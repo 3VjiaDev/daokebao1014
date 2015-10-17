@@ -23,9 +23,25 @@
     [self initData];
     [self getCustomerList];
     [self cellFristRow:self.titleView];
-    
+    styleAry = [[NSMutableArray alloc]init];
+    unUpdataUserArray = [self readplistData1:@"updataUser.plist"];
+
     // Do any additional setup after loading the view.
 }
+-(NSMutableArray*)array
+{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:addName.text forKey:@"name"];
+    [dic setValue:addSex forKey:@"sex"];
+    [dic setValue:addPhone.text forKey:@"phone"];
+    [dic setValue:addr.text forKey:@"address"];
+    [dic setValue:addMark.text forKey:@"mark"];
+    [dic setValue:styleAry forKey:@"style"];
+    [unUpdataUserArray addObject:dic];
+    
+    return unUpdataUserArray;
+}
+
 #pragma mark 初始化数据
 -(void)initData
 {
@@ -33,7 +49,6 @@
     IDAry = [[NSMutableArray alloc]init];
     phoneAry = [[NSMutableArray alloc]init];
     addrAry = [[NSMutableArray alloc]init];
-    styleAry = [[NSMutableArray alloc]init];
     markAry = [[NSMutableArray alloc]init];
 }
 
@@ -51,7 +66,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return nameAry.count;
+    return nameAry.count+unUpdataUserArray.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,7 +84,15 @@
     for (UIView *view in [cell.contentView subviews]) {
         [view removeFromSuperview];
     }
-    [self cellRow:cell.contentView name:[nameAry objectAtIndex:indexPath.row] phone:[phoneAry objectAtIndex:indexPath.row] address:[addrAry objectAtIndex:indexPath.row] style:[nameAry objectAtIndex:indexPath.row]];
+    if (indexPath.row < unUpdataUserArray.count) {
+        
+        [self cellRow:cell.contentView name:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"name"] phone:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"name"] address:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"name"] style:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"name"] state:@"未上传"];
+    }
+    else
+    {
+         [self cellRow:cell.contentView name:[nameAry objectAtIndex:(indexPath.row-unUpdataUserArray.count)] phone:[phoneAry objectAtIndex:(indexPath.row-unUpdataUserArray.count)] address:[addrAry objectAtIndex:(indexPath.row-unUpdataUserArray.count)] style:[nameAry objectAtIndex:(indexPath.row-unUpdataUserArray.count)] state:@"查看"];
+    }
+   
     return cell;
 }
 
@@ -96,9 +119,9 @@
     }
 }
 
--(void)cellRow:(UIView*)view name:(NSString *)name phone:(NSString*)phone address:(NSString*)address style:(NSString*)style
+-(void)cellRow:(UIView*)view name:(NSString *)name phone:(NSString*)phone address:(NSString*)address style:(NSString*)style state:(NSString*)state
 {
-    NSArray *infoAry = @[name,phone,address,style,@"查看"];
+    NSArray *infoAry = @[name,phone,address,style,state];
     NSArray *xAry = @[@0,@150,@300,@610,@870];
     NSArray *widthAry = @[@149,@149,@309,@259,@134];
     float h = view.frame.size.height;
@@ -108,6 +131,9 @@
         
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake([xPoint floatValue], 0, [width floatValue], h)];
         lab.text = [infoAry objectAtIndex:i];
+        if (i == 4) {
+            lab.textColor = [UIColor colorWithRed:239/255.0 green:142/255.0 blue:61/255.0 alpha:1.0f];
+        }
         lab.textAlignment = NSTextAlignmentCenter;
         [view addSubview:lab];
         if (i != 0) {
@@ -256,8 +282,7 @@
     
     addButton = [UIButton buttonWithType:UIButtonTypeCustom];
     addButton.frame = CGRectMake(15, 400, 295, 30);
-    
-    //[closeBtn setImage:[[UIImage imageNamed:@"delete_img"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+
     [addButton setTitle:@"完成保存" forState:UIControlStateNormal];
     [addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     addButton.backgroundColor = [UIColor colorWithRed:239/255.0 green:142/255.0 blue:61/255.0 alpha:1.0f];
@@ -281,6 +306,7 @@
                      }
                      completion:^(BOOL finished){
                          [addView removeFromSuperview];
+                         styleAry = [[NSMutableArray alloc]init];
                      }];
 
 }
@@ -309,7 +335,6 @@
             if ([obj isEqualToString:checkbox.titleLabel.text]) {
                 *stop = YES;
                 if (*stop == YES) {
-                    
                     [styleAry removeObject:obj];
                 }
             }
@@ -318,6 +343,7 @@
 }
 -(void)addButtonAction:(id)sender
 {
+   
     UIButton *button = (UIButton*)sender;
     NSLog(@"%@",button.titleLabel.text);
     if ([button.titleLabel.text isEqualToString:@"正在保存..."]) {
@@ -377,15 +403,12 @@
                  NSString *CustomerId = [list objectForKey:@"CustomerId"];
                  NSString *Mobile = [list objectForKey:@"Mobile"];
                  NSString *Address = [list objectForKey:@"Address"];
-                 NSLog(@"name = %@",CustomerName);
                  
                  [nameAry addObject:CustomerName];
                  [IDAry addObject:CustomerId];
                  [phoneAry addObject:Mobile];
                  [addrAry addObject:Address];
-                 
              }
-             NSLog(@"%@",nameAry);
              [self.customerTable reloadData];
          }
      }];
@@ -432,6 +455,7 @@
      {
          if (connectionError) {
              [Tool showAlert:@"网络异常" message:@"连接超时"];
+              [self writeToPlist:@"updataUser.plist" data:[self array]];
          }
          else
          {
@@ -449,13 +473,15 @@
                                   }
                                   completion:^(BOOL finished){
                                       [addView removeFromSuperview];
+                                      styleAry = [[NSMutableArray alloc]init];
                                   }];
                  nameAry = [[NSMutableArray alloc]init];
                  IDAry = [[NSMutableArray alloc]init];
                  phoneAry = [[NSMutableArray alloc]init];
                  addrAry = [[NSMutableArray alloc]init];
-                 styleAry = [[NSMutableArray alloc]init];
                  markAry = [[NSMutableArray alloc]init];
+                 
+                 
                  [self getCustomerList];
              }
              else
@@ -468,6 +494,8 @@
                                   completion:^(BOOL finished){
                                       [addView removeFromSuperview];
                                   }];
+                  [self writeToPlist:@"updataUser.plist" data:[self array]];
+                  styleAry = [[NSMutableArray alloc]init];
                  [Tool showAlert:@"添加失败" message:@"添加客户失败"];
              }
          }
@@ -515,6 +543,43 @@
     request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
     
     return request;
+}
+#pragma mark 文件操作
+/*
+ 功能：向plist文件中写入数据
+ 输入：name：文件名
+ 输出：null
+ */
+-(void)writeToPlist:(NSString*)plistName data:(id)data
+{
+    //获取应用程序沙盒的Documents目录
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *plistPath = [paths objectAtIndex:0];
+    NSLog(@"%@",plistPath);
+    //得到完整的文件名
+    NSString *filename=[plistPath stringByAppendingPathComponent:plistName];
+    
+    //写入数据
+    [data writeToFile:filename atomically:YES];
+}
+
+/*
+ 功能：读取plist文件数据
+ 输入：name：plist文件名
+ 输出：plist数据
+ */
+-(NSMutableArray *)readplistData1:(NSString*)plistName
+{
+    //获取应用程序沙盒的Documents目录
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *plistPath = [paths objectAtIndex:0];
+    NSLog(@"%@",plistPath);
+    //得到完整的文件名
+    NSString *filename=[plistPath stringByAppendingPathComponent:plistName];
+    
+    NSMutableArray *array = [[NSMutableArray alloc] initWithContentsOfFile:filename];
+    return array;
+    
 }
 
 - (void)didReceiveMemoryWarning {

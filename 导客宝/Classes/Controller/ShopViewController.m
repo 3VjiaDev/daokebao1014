@@ -638,7 +638,6 @@
         UITapGestureRecognizer *tapGestureTel = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouch:)];
         
         [lab addGestureRecognizer:tapGestureTel];
-
     }
 }
 -(void)labelTouch:(UIGestureRecognizer*)gestureRecognizer
