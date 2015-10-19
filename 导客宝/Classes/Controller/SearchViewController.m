@@ -56,8 +56,8 @@
     
     if (delete == YES) {
         UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        deleteBtn.frame = CGRectMake(370, 35, 50, 30);
-        [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+        
+        [deleteBtn setImage:[[UIImage imageNamed:@"qingkong"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         [deleteBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [deleteBtn addTarget:self action:@selector(deleteHistorySearch:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:deleteBtn];
@@ -86,7 +86,6 @@
         UITapGestureRecognizer *tapGestureTel = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouch:)];
         
         [lab addGestureRecognizer:tapGestureTel];
-
     }
 }
 

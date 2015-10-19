@@ -27,7 +27,7 @@
     table.dataSource = self;
     [self.view addSubview:table];
     table.separatorStyle = NO;
-    [self initYiRefreshHeader];
+    //[self initYiRefreshHeader];
     [self initYiRefreshFooter];
     [self GetQJTList:indexPage];
     indexPage++;
