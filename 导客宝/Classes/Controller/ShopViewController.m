@@ -397,11 +397,11 @@
     UIImageView *isCollectionImageView = [[UIImageView alloc]initWithFrame:CGRectMake(rect.size.width-30, (titleView.frame.size.height - 15)/2, 15, 15)];
     
     if (isCollect) {
-        isCollectionImageView.image = [UIImage imageNamed:@"xiangqingbaocun-dianji" ];
+        isCollectionImageView.image = [UIImage imageNamed:@"xiangqingbaocun-weidianji" ];
     }
     else
     {
-         isCollectionImageView.image = [UIImage imageNamed:@"xiangqingbaocun-dianji" ];
+         isCollectionImageView.image = [UIImage imageNamed:@"xiangqingbaocun-weidianji" ];
     }
     [titleView addSubview:isCollectionImageView];
     isCollectionImageView.userInteractionEnabled = YES;

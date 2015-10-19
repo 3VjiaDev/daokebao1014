@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0hX-y8-HOM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0hX-y8-HOM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -41,8 +41,12 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wenzi" translatesAutoresizingMaskIntoConstraints="NO" id="opt-7W-R2m">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="REA-7c-mUY"/>
-                                    <constraint firstAttribute="height" constant="17" id="dPb-YS-IfX"/>
+                                    <constraint firstAttribute="width" constant="160" id="REA-7c-mUY">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="152"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="17" id="dPb-YS-IfX">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="13"/>
+                                    </constraint>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -210,6 +214,12 @@
                                             <outlet property="delegate" destination="0hX-y8-HOM" id="l4D-Nt-3bh"/>
                                         </connections>
                                     </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beijing" translatesAutoresizingMaskIntoConstraints="NO" id="snw-my-hsa">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                            <rect key="frame" x="-317" y="-337" width="1042" height="782"/>
+                                        </variation>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="kU9-M1-rLf" firstAttribute="height" secondItem="cJW-zm-MBf" secondAttribute="height" id="0bm-KD-J0X"/>
@@ -234,6 +244,7 @@
                                         <exclude reference="cJW-zm-MBf"/>
                                         <exclude reference="ouB-32-h2E"/>
                                         <exclude reference="kU9-M1-rLf"/>
+                                        <exclude reference="snw-my-hsa"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="ihK-Im-4Gp"/>
@@ -277,13 +288,12 @@
                                         <include reference="r3T-aF-apg"/>
                                     </mask>
                                 </variation>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beijing" translatesAutoresizingMaskIntoConstraints="NO" id="snw-my-hsa">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="subviews">
+                                        <include reference="snw-my-hsa"/>
+                                    </mask>
                                 </variation>
-                            </imageView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -309,19 +319,18 @@
                                 <exclude reference="xqD-JY-sFd"/>
                                 <exclude reference="cCs-lq-Yb9"/>
                                 <exclude reference="nYj-1H-fc8"/>
-                                <exclude reference="snw-my-hsa"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="9rn-WK-cYS"/>
+                                <exclude reference="9zz-HA-5o2"/>
+                                <exclude reference="tfi-PA-RhY"/>
                                 <exclude reference="T38-oe-Ad2"/>
                                 <exclude reference="cmO-gi-6Op"/>
+                                <exclude reference="lyr-09-K34"/>
                                 <exclude reference="n1X-mY-rqe"/>
                                 <exclude reference="phv-be-v9G"/>
                                 <exclude reference="ACd-AJ-kyx"/>
                                 <exclude reference="g6y-pL-dt7"/>
-                                <exclude reference="lyr-09-K34"/>
-                                <exclude reference="9zz-HA-5o2"/>
-                                <exclude reference="tfi-PA-RhY"/>
+                                <exclude reference="9rn-WK-cYS"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=regular">
@@ -333,21 +342,16 @@
                                 <include reference="nYj-1H-fc8"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="9rn-WK-cYS"/>
+                                <include reference="9zz-HA-5o2"/>
+                                <include reference="tfi-PA-RhY"/>
                                 <include reference="T38-oe-Ad2"/>
                                 <include reference="cmO-gi-6Op"/>
+                                <include reference="lyr-09-K34"/>
                                 <include reference="n1X-mY-rqe"/>
                                 <include reference="phv-be-v9G"/>
                                 <include reference="ACd-AJ-kyx"/>
                                 <include reference="g6y-pL-dt7"/>
-                                <include reference="lyr-09-K34"/>
-                                <include reference="9zz-HA-5o2"/>
-                                <include reference="tfi-PA-RhY"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <mask key="subviews">
-                                <include reference="snw-my-hsa"/>
+                                <include reference="9rn-WK-cYS"/>
                             </mask>
                         </variation>
                     </view>
@@ -660,9 +664,6 @@
                                                 <include reference="yMi-ds-FKb"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="325" y="15" width="119" height="65"/>
-                                        </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DML-v0-CwP">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -685,9 +686,6 @@
                                                 <include reference="G5X-xC-L2O"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="693" y="15" width="75" height="65"/>
-                                        </variation>
                                         <connections>
                                             <action selector="addClient:" destination="4Ij-xC-UXK" eventType="touchUpInside" id="26j-me-mT1"/>
                                         </connections>
@@ -704,8 +702,7 @@
                                                 <exclude reference="ZxW-eA-Q7Q"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="617" y="15" width="75" height="65"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
                                             <mask key="constraints">
                                                 <include reference="QKi-6n-AcS"/>
                                                 <include reference="ZxW-eA-Q7Q"/>
@@ -760,8 +757,7 @@
                                         <include reference="uQO-ID-KEi"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="80"/>
+                                <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="subviews">
                                         <include reference="qhG-FS-zc4"/>
                                     </mask>
@@ -784,8 +780,7 @@
                                         <exclude reference="des-G8-ODe"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="15" y="99" width="738" height="44"/>
+                                <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="constraints">
                                         <include reference="des-G8-ODe"/>
                                     </mask>
@@ -794,9 +789,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EnU-nL-fHK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="15" y="144" width="738" height="850"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="4Ij-xC-UXK" id="QR5-Xw-FKK"/>
                                     <outlet property="delegate" destination="4Ij-xC-UXK" id="Tqf-Bu-4M3"/>
@@ -1231,8 +1223,7 @@
                                         <variation key="widthClass=regular" ambiguous="YES" misplaced="YES">
                                             <rect key="frame" x="453" y="0.0" width="119" height="65"/>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="325" y="15" width="119" height="65"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
                                             <mask key="constraints">
                                                 <include reference="BED-fp-weq"/>
                                                 <include reference="RI8-SG-uVB"/>
@@ -1285,9 +1276,6 @@
                                                 <include reference="j7I-Oh-ClT"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="617" y="15" width="75" height="65"/>
-                                        </variation>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQI-N8-uI7">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1309,9 +1297,6 @@
                                                 <include reference="3cf-nJ-zZI"/>
                                                 <include reference="XPc-kA-hf8"/>
                                             </mask>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="693" y="15" width="75" height="65"/>
                                         </variation>
                                     </button>
                                 </subviews>
@@ -1366,8 +1351,7 @@
                                         <include reference="Bcf-ma-Nkp"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="80"/>
+                                <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="constraints">
                                         <include reference="Tl9-sY-bUQ"/>
                                         <include reference="ujx-lb-6jc"/>
@@ -1377,9 +1361,6 @@
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PnR-Dx-IBv">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="80" width="768" height="944"/>
-                                </variation>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
@@ -1676,12 +1657,12 @@
         <image name="sousuo-weidianji" width="75" height="65"/>
         <image name="tianjiakehu-weidianji" width="75" height="65"/>
         <image name="touxiang-weidenglu" width="45" height="45"/>
-        <image name="wenzi" width="256" height="22"/>
+        <image name="wenzi" width="128" height="11"/>
         <image name="yonghudenglu" width="100" height="27"/>
         <image name="yuntongbu-weidianji" width="75" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GIj-gu-CDd"/>
+        <segue reference="LGH-Aj-8VG"/>
         <segue reference="AuR-ON-pkD"/>
         <segue reference="4hM-BX-GmN"/>
     </inferredMetricsTieBreakers>
