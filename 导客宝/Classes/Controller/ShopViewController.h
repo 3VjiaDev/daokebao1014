@@ -67,5 +67,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *typebutton;
 //头像
 @property (weak, nonatomic) IBOutlet UIImageView *faceImage;
+@property (weak, nonatomic) IBOutlet UIImageView *upDown;
 
 @end

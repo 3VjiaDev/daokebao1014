@@ -56,8 +56,8 @@
     
     if (delete == YES) {
         UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        [deleteBtn setImage:[[UIImage imageNamed:@"qingkong"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        deleteBtn.frame = CGRectMake(385, 35, 25, 25);
+        [deleteBtn setImage:[[UIImage imageNamed:@"qingkong.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         [deleteBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [deleteBtn addTarget:self action:@selector(deleteHistorySearch:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:deleteBtn];

@@ -19,6 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.upDown.image = [UIImage imageNamed:@"xiangshang"];
     indexPage = 1;
     [self initFaceImage];
     [self initQJTTableView];
@@ -127,7 +128,7 @@
 
 //改变获取全景图类型
 - (void)notification:(NSNotification *)text{
-    
+    self.upDown.image = [UIImage imageNamed:@"xiangshang"];
     if (popover) {
         [popover dismissPopoverAnimated:NO];
     }
@@ -166,6 +167,7 @@
 
 
 - (IBAction)changeStyle:(id)sender {
+    self.upDown.image = [UIImage imageNamed:@"xiangxia"];
     UIButton *button = (UIButton*)sender;
     Popover *qktb = [[Popover alloc]init];
     qktb.view.backgroundColor = [UIColor colorWithRed:239/255.0 green:142/255.0 blue:61/255.0 alpha:1.0f];
