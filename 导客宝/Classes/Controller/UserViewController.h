@@ -11,6 +11,7 @@
 #import "singleton.h"
 #import "QRadioButton.h"
 #import "QCheckBox.h"
+#import "User.h"
 
 @interface UserViewController : UIViewController<QCheckBoxDelegate>
 {

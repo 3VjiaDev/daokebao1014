@@ -60,6 +60,7 @@
 		9F83CEEC1BD48477008680C9 /* qingkong.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F83CEEB1BD48477008680C9 /* qingkong.png */; };
 		9F83CEEF1BD49919008680C9 /* xiangshang.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F83CEED1BD49919008680C9 /* xiangshang.png */; };
 		9F83CEF01BD49919008680C9 /* xiangxia.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F83CEEE1BD49919008680C9 /* xiangxia.png */; };
+		9F83CEF61BD4EE5A008680C9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F83CEF51BD4EE5A008680C9 /* User.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +167,8 @@
 		9F83CEEB1BD48477008680C9 /* qingkong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qingkong.png; sourceTree = "<group>"; };
 		9F83CEED1BD49919008680C9 /* xiangshang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xiangshang.png; sourceTree = "<group>"; };
 		9F83CEEE1BD49919008680C9 /* xiangxia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xiangxia.png; sourceTree = "<group>"; };
+		9F83CEF41BD4EE5A008680C9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = "导客宝/Classes/Other/User.h"; sourceTree = SOURCE_ROOT; };
+		9F83CEF51BD4EE5A008680C9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = "导客宝/Classes/Other/User.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +207,8 @@
 				2E113ACB1BC51C670058950F /* LoginViewController.m */,
 				2EE875571BC616A1000594AD /* ShopViewController.h */,
 				2EE875581BC616A1000594AD /* ShopViewController.m */,
+				9F83CEF41BD4EE5A008680C9 /* User.h */,
+				9F83CEF51BD4EE5A008680C9 /* User.m */,
 				2E113ACC1BC51C670058950F /* UserViewController.h */,
 				2E113ACD1BC51C670058950F /* UserViewController.m */,
 				2E80D2421BC6507B00C29A50 /* SearchViewController.h */,
@@ -506,6 +511,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F83CEF61BD4EE5A008680C9 /* User.m in Sources */,
 				2E113AD51BC51C670058950F /* UserViewController.m in Sources */,
 				2E113AD61BC51C670058950F /* UserInformationTableViewCell.m in Sources */,
 				9F5FE52F1BCB851200592124 /* UIImage+WebP.m in Sources */,

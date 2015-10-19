@@ -15,6 +15,7 @@
 #import "singleton.h"
 #import "YiRefreshHeader.h"
 #import "YiRefreshFooter.h"
+#import "AppDelegate.h"
 
 @interface ShopViewController : UIViewController
 {

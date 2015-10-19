@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    addSex = @"女";
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.cloudImageView.hidden = YES;
     [self initData];
@@ -25,18 +26,37 @@
     [self cellFristRow:self.titleView];
     styleAry = [[NSMutableArray alloc]init];
     unUpdataUserArray = [self readplistData1:@"updataUser.plist"];
-
+    
+    if (unUpdataUserArray.count > 0) {
+        for (int i = unUpdataUserArray.count-1; i >= 0; i--) {
+            User *user = [[User alloc]init];
+            user.name = [[unUpdataUserArray objectAtIndex:i]objectForKey:@"name"];
+            user.phone = [[unUpdataUserArray objectAtIndex:i]objectForKey:@"phone"];
+            user.sex = [[unUpdataUserArray objectAtIndex:i]objectForKey:@"sex"];
+            user.address = [[unUpdataUserArray objectAtIndex:i]objectForKey:@"address"];
+            user.mark = [[unUpdataUserArray objectAtIndex:i]objectForKey:@"mark"];
+            user.styleAry = [[unUpdataUserArray objectAtIndex:i]objectForKey:@"style"];
+            
+            [self addCustomer:user];
+            [unUpdataUserArray removeObjectAtIndex:i];
+            [self writeToPlist:@"updataUser.plist" data:unUpdataUserArray];
+        }
+    }
+    else
+    {
+        unUpdataUserArray = [[NSMutableArray alloc]init];
+    }
     // Do any additional setup after loading the view.
 }
--(NSMutableArray*)array
+-(NSMutableArray*)array:(User*)user
 {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    [dic setValue:addName.text forKey:@"name"];
-    [dic setValue:addSex forKey:@"sex"];
-    [dic setValue:addPhone.text forKey:@"phone"];
-    [dic setValue:addr.text forKey:@"address"];
-    [dic setValue:addMark.text forKey:@"mark"];
-    [dic setValue:styleAry forKey:@"style"];
+    [dic setValue:user.name forKey:@"name"];
+    [dic setValue:user.sex forKey:@"sex"];
+    [dic setValue:user.phone forKey:@"phone"];
+    [dic setValue:user.address forKey:@"address"];
+    [dic setValue:user.mark forKey:@"mark"];
+    [dic setValue:user.styleAry forKey:@"style"];
     [unUpdataUserArray addObject:dic];
     
     return unUpdataUserArray;
@@ -86,7 +106,7 @@
     }
     if (indexPath.row < unUpdataUserArray.count) {
         
-        [self cellRow:cell.contentView name:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"name"] phone:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"name"] address:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"name"] style:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"name"] state:@"未上传"];
+        [self cellRow:cell.contentView name:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"name"] phone:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"phone"] address:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"address"] style:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"name"] state:@"未上传"];
     }
     else
     {
@@ -356,7 +376,14 @@
         return;
     }
     [button setTitle:@"正在保存..." forState:UIControlStateNormal];
-    [self addCustomer];
+    User *user =[[User alloc]init];
+    user.name = addName.text;
+    user.sex = addSex;
+    user.phone = addPhone.text;
+    user.mark = addMark.text;
+    user.address = addr.text;
+    user.styleAry = styleAry;
+    [self addCustomer:user];
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView
@@ -447,15 +474,18 @@
  返回：null
  */
 
--(void)addCustomer
+-(void)addCustomer:(User*)user
 {
-    [NSURLConnection sendAsynchronousRequest:[self addCustomer:addName.text sex:addSex phone:addPhone.text address:addr.text mark:addMark.text style:@[@"11",@"12"]]
+    [NSURLConnection sendAsynchronousRequest:[self addCustomer:user.name sex:user.sex phone:user.phone address:user.address mark:user.mark style:user.styleAry]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
      {
          if (connectionError) {
              [Tool showAlert:@"网络异常" message:@"连接超时"];
-              [self writeToPlist:@"updataUser.plist" data:[self array]];
+             [self writeToPlist:@"updataUser.plist" data:[self array:user]];
+             styleAry = [[NSMutableArray alloc]init];
+             unUpdataUserArray = [self readplistData1:@"updataUser.plist"];
+             [self.customerTable reloadData];
          }
          else
          {
@@ -481,7 +511,6 @@
                  addrAry = [[NSMutableArray alloc]init];
                  markAry = [[NSMutableArray alloc]init];
                  
-                 
                  [self getCustomerList];
              }
              else
@@ -494,9 +523,11 @@
                                   completion:^(BOOL finished){
                                       [addView removeFromSuperview];
                                   }];
-                  [self writeToPlist:@"updataUser.plist" data:[self array]];
+                 [self writeToPlist:@"updataUser.plist" data:[self array:user]];
                   styleAry = [[NSMutableArray alloc]init];
                  [Tool showAlert:@"添加失败" message:@"添加客户失败"];
+                 unUpdataUserArray = [self readplistData1:@"updataUser.plist"];
+                 [self.customerTable reloadData];
              }
          }
      }];

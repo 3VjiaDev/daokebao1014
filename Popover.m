@@ -24,7 +24,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.menus = [[NSMutableArray alloc]initWithObjects:@"曲美装饰",@"云库", nil];
+    AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+
+    if (delegate.isMain) {
+        
+        self.menus = [[NSMutableArray alloc]initWithObjects:@"云库",@"曲美装饰", nil];
+    }
+   else
+   {
+       self.menus = [[NSMutableArray alloc]initWithObjects:@"曲美装饰",@"云库", nil];
+   }
 
 }
 

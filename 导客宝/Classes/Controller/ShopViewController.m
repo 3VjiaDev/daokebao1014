@@ -18,6 +18,27 @@
 
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+   AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    if (delegate.isMain) {
+        styleString = @"";
+        areaString = @"";
+        spaceString = @"";
+        [self.typebutton setTitle:@"云库" forState:UIControlStateNormal];
+        isCloud = YES;
+        [self initData];
+        indexPage = 1;
+        [self GetQJTList:indexPage++ deptid:@"" style:styleString area:areaString space:spaceString];
+    }
+    else
+    {
+        [self.typebutton setTitle:@"曲美装饰" forState:UIControlStateNormal];
+        isCloud = NO;
+        [self initData];
+        indexPage = 1;
+        NSString *deptid = [singleton initSingleton].deptid;
+        [self GetQJTList:indexPage++ deptid:deptid style:@"" area:@"" space:@""];
+
+    }
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.upDown.image = [UIImage imageNamed:@"xiangshang"];
     indexPage = 1;
@@ -151,6 +172,8 @@
         indexPage = 1;
         NSString *deptid = [singleton initSingleton].deptid;
         [self GetQJTList:indexPage++ deptid:deptid style:@"" area:@"" space:@""];
+        AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+        delegate.isMain = NO;
     }
     else
     {
@@ -162,6 +185,8 @@
         [self initData];
         indexPage = 1;
         [self GetQJTList:indexPage++ deptid:@"" style:styleString area:areaString space:spaceString];
+        AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+         delegate.isMain = YES;
     }
 }
 
@@ -787,11 +812,12 @@
     //loginout
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"退出登录" message:@"确定退出当前账号？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alert show];
-    
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
+        AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+        delegate.isMain = NO;
         [self performSegueWithIdentifier:@"loginout" sender:self];
     }
 }
