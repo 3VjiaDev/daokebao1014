@@ -42,9 +42,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="REA-7c-mUY">
+                                        <variation key="widthClass=regular" constant="128"/>
                                         <variation key="heightClass=regular-widthClass=regular" constant="152"/>
                                     </constraint>
                                     <constraint firstAttribute="height" constant="17" id="dPb-YS-IfX">
+                                        <variation key="widthClass=regular" constant="11"/>
                                         <variation key="heightClass=regular-widthClass=regular" constant="13"/>
                                     </constraint>
                                 </constraints>
@@ -147,7 +149,6 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJW-zm-MBf">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="OXY-P9-oPg"/>
                                             <constraint firstAttribute="width" constant="348" id="oeO-pM-ta8"/>
@@ -214,7 +215,7 @@
                                             <outlet property="delegate" destination="0hX-y8-HOM" id="l4D-Nt-3bh"/>
                                         </connections>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beijing" translatesAutoresizingMaskIntoConstraints="NO" id="snw-my-hsa">
+                                    <imageView userInteractionEnabled="NO" alpha="0.69999999999999973" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beijing" translatesAutoresizingMaskIntoConstraints="NO" id="snw-my-hsa">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                                             <rect key="frame" x="-317" y="-337" width="1042" height="782"/>
@@ -321,16 +322,16 @@
                                 <exclude reference="nYj-1H-fc8"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="9zz-HA-5o2"/>
-                                <exclude reference="tfi-PA-RhY"/>
+                                <exclude reference="9rn-WK-cYS"/>
                                 <exclude reference="T38-oe-Ad2"/>
                                 <exclude reference="cmO-gi-6Op"/>
-                                <exclude reference="lyr-09-K34"/>
                                 <exclude reference="n1X-mY-rqe"/>
                                 <exclude reference="phv-be-v9G"/>
                                 <exclude reference="ACd-AJ-kyx"/>
                                 <exclude reference="g6y-pL-dt7"/>
-                                <exclude reference="9rn-WK-cYS"/>
+                                <exclude reference="lyr-09-K34"/>
+                                <exclude reference="9zz-HA-5o2"/>
+                                <exclude reference="tfi-PA-RhY"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=regular">
@@ -342,16 +343,16 @@
                                 <include reference="nYj-1H-fc8"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="9zz-HA-5o2"/>
-                                <include reference="tfi-PA-RhY"/>
+                                <include reference="9rn-WK-cYS"/>
                                 <include reference="T38-oe-Ad2"/>
                                 <include reference="cmO-gi-6Op"/>
-                                <include reference="lyr-09-K34"/>
                                 <include reference="n1X-mY-rqe"/>
                                 <include reference="phv-be-v9G"/>
                                 <include reference="ACd-AJ-kyx"/>
                                 <include reference="g6y-pL-dt7"/>
-                                <include reference="9rn-WK-cYS"/>
+                                <include reference="lyr-09-K34"/>
+                                <include reference="9zz-HA-5o2"/>
+                                <include reference="tfi-PA-RhY"/>
                             </mask>
                         </variation>
                     </view>
@@ -477,7 +478,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZFM-qe-ll5">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="570" y="39" width="19" height="12"/>
+                                            <rect key="frame" x="543" y="39" width="19" height="12"/>
                                         </variation>
                                     </imageView>
                                 </subviews>
@@ -923,6 +924,10 @@
                                             <constraint firstAttribute="height" constant="44" id="6JH-dC-Tmd"/>
                                         </constraints>
                                         <textInputTraits key="textInputTraits"/>
+                                        <scopeButtonTitles>
+                                            <string>Title</string>
+                                            <string>Title</string>
+                                        </scopeButtonTitles>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="6JH-dC-Tmd"/>
@@ -1662,8 +1667,8 @@
         <image name="yuntongbu-weidianji" width="75" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LGH-Aj-8VG"/>
         <segue reference="AuR-ON-pkD"/>
-        <segue reference="4hM-BX-GmN"/>
+        <segue reference="GIj-gu-CDd"/>
+        <segue reference="pOo-39-8Fh"/>
     </inferredMetricsTieBreakers>
 </document>
