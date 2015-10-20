@@ -11,6 +11,7 @@
 @interface singleton : NSObject
 
 @property (strong,nonatomic) NSString *deptid;
+@property (strong, nonatomic)NSString *HeadIco;
 
 +(singleton*)initSingleton;
 

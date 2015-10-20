@@ -7,8 +7,9 @@
 //
 
 #import "ShowDetailViewController.h"
+#import "UMSocial.h"
 
-@interface ShowDetailViewController ()
+@interface ShowDetailViewController ()<UMSocialUIDelegate>
 
 @end
 
@@ -34,6 +35,21 @@
 }
 
 - (IBAction)share:(id)sender {
+
+
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"55fa8188e0f55ae5bb000b6a"
+                                      shareText:@"分享"
+                                     shareImage:nil
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,nil]
+                                       delegate:self];
+    //[UMSocialData defaultData].extConfig.wechatSessionData.url = shareLink;
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"111";
+   // [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareLink;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"111";
+    //[UMSocialData defaultData].extConfig.qqData.url = shareLink;
+    [UMSocialData defaultData].extConfig.qqData.title =  @"111";
+    //[self addShareCount];
 }
 
 - (IBAction)collect:(id)sender {

@@ -100,9 +100,10 @@
                      [userDefaults setObject:[Tool encodeToPercentEscapeString:AuthCode] forKey:@"AuthCode"];
                      
                      NSString *DeptId = [[dic objectForKey:@"JSON"]objectForKey:@"DeptId"];
+                     NSString *headIco = [[dic objectForKey:@"JSON"]objectForKey:@"HeadIco"];
                      singleton *single = [singleton initSingleton];
                      single.deptid = DeptId;
-                     
+                     single.HeadIco = headIco;
                      [self performSegueWithIdentifier:@"login" sender:self];
                  }
                  else

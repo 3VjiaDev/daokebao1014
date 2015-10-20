@@ -12,7 +12,8 @@
 #import "QRadioButton.h"
 #import "QCheckBox.h"
 #import "User.h"
-
+#import "YiRefreshHeader.h"
+#import "YiRefreshFooter.h"
 @interface UserViewController : UIViewController<QCheckBoxDelegate>
 {
     NSMutableArray *nameAry;
@@ -34,11 +35,15 @@
     UITextView *addr;
     UITextView *addMark;
     NSMutableArray *addStyleAry;
+    
+    YiRefreshHeader *refreshHeader;//下拉刷新
+    YiRefreshFooter *refreshFooter;//上拉加载
+    int indexPage;//页码
 }
 @property (weak, nonatomic) IBOutlet UIButton *addCustomerBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *cloudImageView;
 
-@property (weak, nonatomic) IBOutlet UITableView *customerTable;
+@property (strong, nonatomic)  UITableView *customerTable;
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 
 //添加客户

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5bfc;&#x5ba2;&#x5b9d;/Classes/Controller/UserViewController.m"
-            timestampString = "466940509.500849"
+            timestampString = "467021920.278111"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
             landmarkName = "-didSelectedCheckBox:checked:"
             landmarkType = "5">
          </BreakpointContent>

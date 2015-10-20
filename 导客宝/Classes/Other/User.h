@@ -15,7 +15,6 @@
 @property(nonatomic,strong)NSString *phone;
 @property(nonatomic,strong)NSString *address;
 @property(nonatomic, strong)NSString *mark;
-
 @property(nonatomic,strong)NSMutableArray *styleAry;
 
 @end

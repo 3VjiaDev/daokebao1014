@@ -50,8 +50,7 @@
     NSString *spaceString;
     
     UIPopoverController *popover;
-    
-     UIView *isNullView;
+    UIView *isNullView;
     
 }
 //改变类型

@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +20,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [UMSocialData setAppKey:@"55fa8188e0f55ae5bb000b6a"];
+    
+    //设置微信AppId、appSecret，分享url
+    [UMSocialWechatHandler setWXAppId:@"wxf392385470558580" appSecret:@"388710f1c5ef9fd5432bd83538e7e134" url:@"http://www.umeng.com/social"];
+    
+    [UMSocialQQHandler setQQWithAppId:@"1104850476" appKey:@"t4QSoe32jD6OKBQs" url:@"http://www.umeng.com/social"];
+    [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline]];
+
     return YES;
 }
 

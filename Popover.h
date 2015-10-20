@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString *const kCDTypeString;
-
 @interface Popover : UITableViewController
-
 
 @end

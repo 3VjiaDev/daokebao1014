@@ -8,7 +8,7 @@
 
 #import "ShopViewController.h"
 
-@interface ShopViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ShopViewController ()<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate>
 
 @end
 
@@ -41,15 +41,12 @@
     }
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.upDown.image = [UIImage imageNamed:@"xiangshang"];
-    indexPage = 1;
     [self initFaceImage];
     [self initQJTTableView];
     [self initYiRefreshHeader];
     [self initYiRefreshFooter];
-    [self initData];
-    NSString *deptid = [singleton initSingleton].deptid;
-    [self GetQJTList:indexPage++ deptid:deptid style:@"" area:@"" space:@""];
-
+    NSString *faceString = [NSString stringWithFormat:@"%@%@",[Tool requestImageURL],[singleton initSingleton].HeadIco];
+    [self.faceImage sd_setImageWithURL:[NSURL URLWithString:faceString] placeholderImage:[UIImage imageNamed:@"touxiang-weidenglu"]];
     //设置通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification:) name:@"tongzhi" object:nil];
    
@@ -121,12 +118,9 @@
     refreshFooter=[[YiRefreshFooter alloc] init];
     refreshFooter.scrollView=qjtTableView;
     [refreshFooter footer];
-    
     refreshFooter.beginRefreshingBlock=^(){
         // 后台执行：
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            //sleep(2);
-            // [self analyseRequestData];
             if (!isCloud) {
                 NSString *deptid = [singleton initSingleton].deptid;
                 [self GetQJTList:indexPage++ deptid:deptid style:@"" area:@"" space:@""];
@@ -138,7 +132,6 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 主线程刷新视图
-                //[qjtTableView reloadData];
                 [refreshFooter endRefreshing];
             });
         });
@@ -146,7 +139,10 @@
 }
 
 #pragma mark 设置通知
-
+-(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    self.upDown.image = [UIImage imageNamed:@"xiangshang"];
+}
 //改变获取全景图类型
 - (void)notification:(NSNotification *)text{
     self.upDown.image = [UIImage imageNamed:@"xiangshang"];
@@ -200,6 +196,7 @@
     // 创建一个UIPopover
     
     popover = [[UIPopoverController alloc]initWithContentViewController:qktb];
+    popover.delegate = self;
     popover.backgroundColor = [UIColor colorWithRed:239/255.0 green:142/255.0 blue:61/255.0 alpha:1.0f];
     // 设置尺寸
     popover.popoverContentSize = CGSizeMake(100, 60);
