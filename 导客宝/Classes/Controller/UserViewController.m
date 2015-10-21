@@ -9,7 +9,6 @@
 
 #import "UserViewController.h"
 
-
 @interface UserViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UITextViewDelegate,QRadioButtonDelegate>
 
 @end
