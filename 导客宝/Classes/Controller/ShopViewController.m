@@ -424,7 +424,7 @@
     {
          isCollectionImageView.image = [UIImage imageNamed:@"xiangqingbaocun-weidianji" ];
     }
-    [titleView addSubview:isCollectionImageView];
+    //[titleView addSubview:isCollectionImageView];
     isCollectionImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *collectGestureTel = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(collent:)];
     
@@ -537,7 +537,7 @@
     NSArray *object = @[authCode,deptid,style,space,area,@"9",page];
     
     NSString *param=[NSString stringWithFormat:@"Params=%@&Command=DesignScheme/GetSchemeList",[Tool param:object forKey:key]];
-    NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);
+    NSLog(@"http://passport.admin.mnmnh.com/mnmnhwap.axd?%@",param);
     
     request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -607,7 +607,7 @@
     NSArray *object = @[authCode];
     
     NSString *param=[NSString stringWithFormat:@"Params=%@&Command=DesignScheme/GetSchemeCategory",[Tool param:object forKey:key]];
-    NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);
+    NSLog(@"http://passport.admin.mnmnh.com/mnmnhwap.axd?%@",param);
     
     request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
     

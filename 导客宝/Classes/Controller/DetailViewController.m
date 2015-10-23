@@ -22,7 +22,7 @@
     self.qjtID = [qjtSingleton initQJTSingleton].qjtId;
     self.qjtName = [qjtSingleton initQJTSingleton].qjtName;
     self.isCollenct = [qjtSingleton initQJTSingleton].isCollent;
-    
+    self.collectBtn.hidden = YES;
     NSString *UrlString = [NSString stringWithFormat:@"%@%@",[Tool qjtRequestUrl],self.qjtID];
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:UrlString]];
     [self.webView loadRequest:request];
@@ -34,21 +34,19 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)share:(id)sender {
-    
-    
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"55fa8188e0f55ae5bb000b6a"
-                                      shareText:@"分享"
-                                     shareImage:nil
+                                      shareText:self.qjtName
+                                     shareImage:[UIImage imageNamed:@"jiazaipic"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,nil]
                                        delegate:self];
-    //[UMSocialData defaultData].extConfig.wechatSessionData.url = shareLink;
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"111";
-    // [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareLink;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"111";
-    //[UMSocialData defaultData].extConfig.qqData.url = shareLink;
-    [UMSocialData defaultData].extConfig.qqData.title =  @"111";
-    //[self addShareCount];
+    NSString *shareLink = [NSString stringWithFormat:@"%@%@",[Tool qjtRequestUrl],self.qjtID];
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = shareLink;
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.qjtName;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareLink;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = self.qjtName;
+    [UMSocialData defaultData].extConfig.qqData.url = shareLink;
+    [UMSocialData defaultData].extConfig.qqData.title =  self.qjtName;
 }
 
 @end

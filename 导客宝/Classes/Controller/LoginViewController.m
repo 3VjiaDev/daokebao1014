@@ -22,8 +22,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
-    self.phoneTextfield.text = @"qeknio";
-    self.pwdTextField.text = @"123123";
+   // self.phoneTextfield.text = @"qeknio";13427665757 123456
+   // self.pwdTextField.text = @"123123";
     self.pwdTextField.secureTextEntry = YES;
     
     [self initLoginBtn];
@@ -142,7 +142,7 @@
     NSArray *object = @[[Tool encodeToPercentEscapeString:authCode],name,pwd];
     
     NSString *param=[NSString stringWithFormat:@"Params=%@&Command=COMMON/UserLogin",[Tool param:object forKey:key]];
-    NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);
+    NSLog(@"http://passport.admin.mnmnh.com/mnmnhwap.axd?%@",param);
     
     request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
     

@@ -15,6 +15,7 @@
 @property (strong, nonatomic)NSString* qjtID;
 @property (strong, nonatomic)NSString* qjtName;
 @property (assign, nonatomic)BOOL isCollenct;
+@property (weak, nonatomic) IBOutlet UIButton *collectBtn;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

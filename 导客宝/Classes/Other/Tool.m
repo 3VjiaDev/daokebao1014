@@ -19,7 +19,7 @@
 + (NSString *)requestURL
 {
     //mnmnh 3weijia
-    return @"http://passport.admin.3weijia.com/mnmnhwap.axd";
+    return @"http://passport.admin.mnmnh.com/mnmnhwap.axd";
 }
 
 /*
@@ -30,7 +30,7 @@
 + (NSString *)requestImageURL
 {
     //mnmnh
-    return @"http://passport.admin.3weijia.com";
+    return @"http://passport.admin.mnmnh.com";
 }
 
 /*
@@ -40,7 +40,7 @@
  */
 +(NSString *)qjtRequestUrl
 {
-    return @"http://passport.admin.3weijia.com/PMC/Panorama/Show360Test.aspx?SchemeId=";
+    return @"http://passport.admin.mnmnh.com/PMC/Panorama/Show360Test.aspx?SchemeId=";
 }
 /*
  功能：错误提示或者警告

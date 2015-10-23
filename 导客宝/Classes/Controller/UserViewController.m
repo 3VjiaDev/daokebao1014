@@ -24,6 +24,7 @@
     self.customerTable = [[UITableView alloc]initWithFrame:CGRectMake(15, 144, self.view.frame.size.width-30, self.view.frame.size.height-170)];
     self.customerTable.delegate = self;
     self.customerTable.dataSource = self;
+    self.customerTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.customerTable];
     
     addSex = @"女";
@@ -175,27 +176,31 @@
     for (UIView *view in [cell.contentView subviews]) {
         [view removeFromSuperview];
     }
+
     if (indexPath.row < unUpdataUserArray.count) {
-        
+        NSLog(@"1");
         [self cellRow:cell.contentView
                  name:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"name"]
                 phone:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"phone"]
               address:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"address"]
-                style:[[unUpdataUserArray objectAtIndex:indexPath.row]objectForKey:@"name"]
+                style:@"田园/欧式"
                 state:@"未上传"
                   tag:(indexPath.row)];
     }
     else
     {
+         NSLog(@"1");
         [self cellRow:cell.contentView
                  name:[nameAry objectAtIndex:(indexPath.row-unUpdataUserArray.count)]
                 phone:[phoneAry objectAtIndex:(indexPath.row-unUpdataUserArray.count)]
               address:[addrAry objectAtIndex:(indexPath.row-unUpdataUserArray.count)]
-                style:[nameAry objectAtIndex:(indexPath.row-unUpdataUserArray.count)]
+                style:@"简约/现代"
                 state:@"查看"
                   tag:(indexPath.row-unUpdataUserArray.count)];
     }
-   
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 49, self.view.frame.size.width-30, 1)];
+    line.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [cell.contentView addSubview:line];
     return cell;
 }
 
@@ -204,7 +209,8 @@
     NSArray *infoAry = @[@"客户姓名",@"手机号",@"地址",@"风格",@"备注"];
     NSArray *xAry = @[@0,@150,@300,@610,@870];
     NSArray *widthAry = @[@149,@149,@309,@259,@134];
-    float h = view.frame.size.height;
+   // float h = view.frame.size.height;
+
     for (int i = 0; i < infoAry.count; i++) {
         id xPoint = [xAry objectAtIndex:i];
         id width = [widthAry objectAtIndex:i];
@@ -215,7 +221,7 @@
         [view addSubview:lab];
         
         if (i != 0) {
-            UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake([xPoint floatValue], 0, 1, h)];
+            UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake([xPoint floatValue], 0, 1, 44)];
             lineView.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [view addSubview:lineView];
         }
@@ -256,9 +262,7 @@
 {
     UILabel *lab=(UILabel*)gestureRecognizer.view;
     if ([lab.text isEqualToString:@"查看"]) {
-        NSLog(@"%@",[IDAry objectAtIndex:lab.tag]);
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"查看" message:@"查看用户备注" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
+        [self getMarkInfo:[IDAry objectAtIndex:lab.tag]];
     }
     else
     {
@@ -587,7 +591,7 @@
     NSArray *object = @[authCode,DeptId,@"12",page];
     
     NSString *param=[NSString stringWithFormat:@"Params=%@&Command=ShopManager/GetCustomerList",[Tool param:object forKey:key]];
-    NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);
+    NSLog(@"http://passport.admin.mnmnh.com/mnmnhwap.axd?%@",param);
     
     request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -634,13 +638,15 @@
              NSString *Json = [dic objectForKey:@"JSON"];
              if (Json != nil) {
                  //添加客户成功
-                                nameAry = [[NSMutableArray alloc]init];
+                nameAry = [[NSMutableArray alloc]init];
                  IDAry = [[NSMutableArray alloc]init];
                  phoneAry = [[NSMutableArray alloc]init];
                  addrAry = [[NSMutableArray alloc]init];
                  markAry = [[NSMutableArray alloc]init];
                  self.cloudImageView.hidden = YES;
-                 [self getCustomerList:indexPage++];
+                 indexPage = 1;
+                 [self getCustomerList:indexPage];
+                 indexPage++;
              }
              else
              {
@@ -699,12 +705,70 @@
     NSString *string = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
     NSString *param=[NSString stringWithFormat:@"Params=%@&Command=ShopManager/EditCustomerInfo",string];
-    NSLog(@"http://passport.admin.3weijia.com/mnmnhwap.axd?%@",param);
+    NSLog(@"http://passport.admin.mnmnh.com/mnmnhwap.axd?%@",param);
     
     request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
     
     return request;
 }
+#pragma mark 获取用户备注
+/*
+ 功能：添加客户信息
+ 输入：null
+ 返回：null
+ */
+
+-(void)getMarkInfo:(NSString*)customerId
+{
+    [NSURLConnection sendAsynchronousRequest:[self getMark:customerId]
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+     {
+        if (connectionError) {
+             [Tool showAlert:@"网络异常" message:@"连接超时"];
+        }
+         else
+         {
+             NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+             //将数据变成标准的json数据
+             NSData *newData = [[Tool newJsonStr:str] dataUsingEncoding:NSUTF8StringEncoding];
+             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:newData options:NSJSONReadingMutableContainers error:nil];
+             NSDictionary *Json = [dic objectForKey:@"JSON"];
+             NSString *mark = [Json objectForKey:@"Remark"];
+             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"备注" message:mark delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+             [alert show];
+        }
+     }];
+}
+
+/*
+ 功能：添加客户信息网络请求
+ 输入：name：客户姓名 sex：性别 phone： address mark style
+ 返回：网络请求
+ */
+- (NSMutableURLRequest*)getMark:(NSString*)customerId
+{
+    NSURL *requestUrl = [NSURL URLWithString:[Tool requestURL]];
+    
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:requestUrl];
+    request.timeoutInterval=10.0;
+    request.HTTPMethod=@"POST";
+    
+    NSString *authCode =[Tool readAuthCodeString];
+    
+    //生成上传数据
+    NSArray *key = @[@"authCode",@"CustomerId"];
+    NSArray *object = @[authCode,customerId];
+    
+    
+    NSString *param=[NSString stringWithFormat:@"Params=%@&Command=shopmanager/GetCustomerInfo",[Tool param:object forKey:key]];
+    NSLog(@"http://passport.admin.mnmnh.com/mnmnhwap.axd?%@",param);
+    
+    request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
+    
+    return request;
+}
+
 #pragma mark 文件操作
 /*
  功能：向plist文件中写入数据

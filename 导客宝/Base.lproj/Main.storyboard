@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0hX-y8-HOM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0hX-y8-HOM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
         <!--登录-->
@@ -107,8 +108,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mima" translatesAutoresizingMaskIntoConstraints="NO" id="tPJ-p7-GDM">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="12" id="46Q-DM-mAf"/>
-                                            <constraint firstAttribute="height" constant="20" id="Xhf-cN-s1l"/>
+                                            <constraint firstAttribute="width" constant="12" id="46Q-DM-mAf">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="14"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="20" id="Xhf-cN-s1l">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="19"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -175,8 +180,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dianhua" translatesAutoresizingMaskIntoConstraints="NO" id="ouB-32-h2E">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="MpZ-la-mSv"/>
-                                            <constraint firstAttribute="width" constant="12" id="agj-VH-0qh"/>
+                                            <constraint firstAttribute="height" constant="20" id="MpZ-la-mSv">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="19"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="12" id="agj-VH-0qh">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="14"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -225,7 +234,9 @@
                                 <constraints>
                                     <constraint firstItem="kU9-M1-rLf" firstAttribute="height" secondItem="cJW-zm-MBf" secondAttribute="height" id="0bm-KD-J0X"/>
                                     <constraint firstItem="ouB-32-h2E" firstAttribute="leading" secondItem="tPJ-p7-GDM" secondAttribute="leading" id="6cd-yS-Pm0"/>
-                                    <constraint firstItem="kU9-M1-rLf" firstAttribute="bottom" secondItem="tPJ-p7-GDM" secondAttribute="bottom" id="Asi-Tg-G7z"/>
+                                    <constraint firstItem="kU9-M1-rLf" firstAttribute="bottom" secondItem="tPJ-p7-GDM" secondAttribute="bottom" id="Asi-Tg-G7z">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="5"/>
+                                    </constraint>
                                     <constraint firstItem="ouB-32-h2E" firstAttribute="leading" secondItem="cJW-zm-MBf" secondAttribute="leading" id="NsT-Ml-acb"/>
                                     <constraint firstItem="kU9-M1-rLf" firstAttribute="trailing" secondItem="cJW-zm-MBf" secondAttribute="trailing" id="OKR-DJ-ztQ"/>
                                     <constraint firstAttribute="centerX" secondItem="cJW-zm-MBf" secondAttribute="centerX" id="R6J-eO-DbP"/>
@@ -236,7 +247,9 @@
                                     <constraint firstAttribute="width" constant="391" id="ihK-Im-4Gp"/>
                                     <constraint firstAttribute="height" constant="183" id="jBU-7N-U0p"/>
                                     <constraint firstAttribute="bottom" secondItem="cJW-zm-MBf" secondAttribute="bottom" constant="40" id="ndQ-UN-G7a"/>
-                                    <constraint firstItem="ouB-32-h2E" firstAttribute="bottom" secondItem="Zsz-iQ-eYC" secondAttribute="bottom" id="r3T-aF-apg"/>
+                                    <constraint firstItem="ouB-32-h2E" firstAttribute="bottom" secondItem="Zsz-iQ-eYC" secondAttribute="bottom" id="r3T-aF-apg">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-5"/>
+                                    </constraint>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -1429,6 +1442,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="collectBtn" destination="hmi-0l-t9C" id="in0-se-gYI"/>
                         <outlet property="webView" destination="PnR-Dx-IBv" id="UYm-6Q-lOa"/>
                     </connections>
                 </viewController>
@@ -1519,6 +1533,9 @@
                                                 <include reference="dwe-DR-qah"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="share:" destination="0I8-dq-eQd" eventType="touchUpInside" id="3aZ-yX-8Gz"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wB5-YZ-zJm">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1647,6 +1664,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="collectBtn" destination="N2A-x6-grB" id="YzU-dN-fqg"/>
                         <outlet property="webView" destination="cnl-8g-n1b" id="5G5-Ae-7tB"/>
                     </connections>
                 </viewController>
@@ -1676,7 +1694,7 @@
         <image name="yuntongbu-weidianji" width="75" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GIj-gu-CDd"/>
+        <segue reference="YUQ-Qy-gNv"/>
         <segue reference="pOo-39-8Fh"/>
         <segue reference="AuR-ON-pkD"/>
     </inferredMetricsTieBreakers>
